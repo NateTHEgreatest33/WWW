@@ -1,6 +1,6 @@
 default:
-	g++ \
-	src/main.cpp \
+	g++ src/main.cpp \
+	src/graphics_main.cpp \
 	-std=c++11 -framework IOKit -framework Cocoa -framework OpenGL `pkg-config --libs --cflags raylib` -o build/RayLibGame
 
 #new cpp files need to be included above to compile
