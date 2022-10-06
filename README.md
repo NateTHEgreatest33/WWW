@@ -5,11 +5,12 @@ make file is setup to run using c compiler
 
 - [x] Initial setup (get compiling)
 - [ ] Ads
-- [ ] Gambling
 - [ ] in-game currency 
-- [ ] microtransactions
+  - [ ] Gambling
+  - [ ] microtransactions
 - [ ] bugginess toggle
 - [ ] DLC
 - [ ] NFTS
 - [ ] pre-orders
 - [ ] hacked client
+  - [ ] game save
