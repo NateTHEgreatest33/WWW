@@ -20,7 +20,7 @@ void graphics_main( void ){
     BeginDrawing();
     ClearBackground(RAYWHITE);
     DrawRectangle(GetScreenWidth()/2 - 112, GetScreenHeight()/2 - 112, 224, 224, Fade(RAYWHITE, 1));
-    DrawText(TextSubtext("raylib", 0, 7), GetScreenWidth()/2 - 44, GetScreenHeight()/2 + 48, 50, Fade(BLACK, alpha));
+    DrawText(TextSubtext("raylib", 0, 7), GetScreenWidth()/2 - 44, GetScreenHeight()/2 + 48, 50, Fade(BLACK, 1));
     EndDrawing();
 
 }
