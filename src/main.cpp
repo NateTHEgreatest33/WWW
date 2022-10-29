@@ -9,16 +9,29 @@
 *   Copyright 2022 Nate Lenze
 *
 *********************************************************************/
-
+/*--------------------------------------------------------------------
+                           GENERAL INCLUDES
+--------------------------------------------------------------------*/
 #include "include/raylib.h"
+
+#include <iostream>
+
 #include "graphics_main.hpp"
-//#include "game_includes/example.hpp"
+#include "input_main.hpp"
+#include "game_main.hpp"
 
-#include "vector"
-#include <unordered_map>
 
-std::vector<int> TestVec;
 
+
+/*********************************************************************
+*
+*   PROCEDURE NAME:
+*       main
+*
+*   DESCRIPTION:
+*       Main loop
+*
+*********************************************************************/
 int main(void)
 {
 
@@ -28,8 +41,12 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "RayLib Example");
     SetTargetFPS(60);
 
+
+    
+
     while ( !WindowShouldClose() )    // Detect window close button or ESC key
         {
+        //std::cout << "here";
         graphics_main();
        
         }
@@ -37,4 +54,4 @@ int main(void)
     CloseWindow();
 
     return 0;
-}
+} /* main() */
