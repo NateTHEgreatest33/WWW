@@ -16,11 +16,24 @@
 
 
 void graphics_main( void ){
+    //draw standard info
+    //mouse pointer?
+    //time playing the game
     
+    //process any events in mailbox to draw?
     BeginDrawing();
     ClearBackground(RAYWHITE);
     DrawRectangle(GetScreenWidth()/2 - 112, GetScreenHeight()/2 - 112, 224, 224, Fade(RAYWHITE, 1));
-    DrawText(TextSubtext("raylib", 0, 7), GetScreenWidth()/2 - 44, GetScreenHeight()/2 + 48, 50, Fade(BLACK, alpha));
+    DrawText(TextSubtext("raylib", 0, 7), GetScreenWidth()/2 - 44, GetScreenHeight()/2 + 48, 50, Fade(BLACK, 1.0f ));
     EndDrawing();
+
+    WaitTime( 1000 );
+
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+    DrawRectangle(20, 20, 224, 224, Fade(GREEN, 1));
+    EndDrawing();
+
+    WaitTime( 1000 );
 
 }

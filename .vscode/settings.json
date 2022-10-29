@@ -70,6 +70,25 @@
 		"fstream": "cpp",
 		"iomanip": "cpp",
 		"valarray": "cpp",
-		"raylib.h": "c"
+		"raylib.h": "c",
+		"__locale": "cpp",
+		"__bit_reference": "cpp",
+		"__config": "cpp",
+		"__debug": "cpp",
+		"__errc": "cpp",
+		"__functional_base": "cpp",
+		"__hash_table": "cpp",
+		"__mutex_base": "cpp",
+		"__node_handle": "cpp",
+		"__nullptr": "cpp",
+		"__split_buffer": "cpp",
+		"__string": "cpp",
+		"__threading_support": "cpp",
+		"__tuple": "cpp",
+		"bitset": "cpp",
+		"complex": "cpp",
+		"optional": "cpp",
+		"ios": "cpp",
+		"locale": "cpp"
 	}
 }
