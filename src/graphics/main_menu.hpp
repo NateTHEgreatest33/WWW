@@ -1,24 +1,23 @@
 /*********************************************************************
 *
 *   NAME:
-*       room.hpp
+*       main_menu.hpp
 *
 *   DESCRIPTION:
-*       room class for graphics
+*       main menu class for graphics
 *
 *   Copyright 2022 Nate Lenze
 *
 *********************************************************************/
 #include "screen.hpp"
 
-template< typename T, int M>
-class room : screen<T, M> 
+class main_menu : screen
     {
     private:
 
     public:
 
-    void drawBackground( void ) = 0;
+    void drawBackground( void );
 
-    void drawItem( T item ) = 0;
+    void drawObj( graphics_msg event );
     };

@@ -9,19 +9,28 @@
 *   Copyright 2022 Nate Lenze
 *
 *********************************************************************/
-#include <iostream>
-#include <vector>
+#ifndef SCREEN_HPP
+#define SCREEN_HPP
 
-template <typename T, int M> //forgot how to use this
+#include <iostream>
+
+#include "graphics_msg.hpp"
+
 class screen 
     {
     private:
-    std::vector<T> _drawnItems;
+
     public:
     std::string screen_name;
 
     void virtual drawBackground( void ) = 0;
 
-    void virtual drawItem( T item ) = 0;
+    void virtual drawObj( graphics_msg event ) = 0;
+
+    void virtual removeObj( graphics_msg event ) = 0;
+
+    void virtual clearAllObj( void ) = 0;
 
     };
+
+#endif

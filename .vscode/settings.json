@@ -89,6 +89,8 @@
 		"complex": "cpp",
 		"optional": "cpp",
 		"ios": "cpp",
-		"locale": "cpp"
+		"locale": "cpp",
+		"queue": "cpp",
+		"any": "cpp"
 	}
 }

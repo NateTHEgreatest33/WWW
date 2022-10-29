@@ -1,13 +1,13 @@
 /*********************************************************************
 *
 *   NAME:
-*       screen.cpp
+*       main_menu.cpp
 *
 *   DESCRIPTION:
-*       background graphics class
+*       main menu class for graphics
 *
 *   Copyright 2022 Nate Lenze
 *
 *********************************************************************/
-#include "screen.hpp"
 
+//idea we have a screen class that inhirites everything

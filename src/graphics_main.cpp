@@ -9,31 +9,81 @@
 *   Copyright 2022 Nate Lenze
 *
 *********************************************************************/
+
+/*--------------------------------------------------------------------
+                           GENERAL INCLUDES
+--------------------------------------------------------------------*/
 #include "graphics_main.hpp"
 
-//main idea is to use a queue to handle incoming graphic requests and handle them in the order they come in
-//accessing the queue will need to be memory safe
+/*--------------------------------------------------------------------
+                          LITERAL CONSTANTS
+--------------------------------------------------------------------*/
 
+/*--------------------------------------------------------------------
+                                TYPES
+--------------------------------------------------------------------*/
 
-void graphics_main( void ){
-    //draw standard info
-    //mouse pointer?
-    //time playing the game
-    
-    //process any events in mailbox to draw?
-    BeginDrawing();
-    ClearBackground(RAYWHITE);
-    DrawRectangle(GetScreenWidth()/2 - 112, GetScreenHeight()/2 - 112, 224, 224, Fade(RAYWHITE, 1));
-    DrawText(TextSubtext("raylib", 0, 7), GetScreenWidth()/2 - 44, GetScreenHeight()/2 + 48, 50, Fade(BLACK, 1.0f ));
-    EndDrawing();
+/*--------------------------------------------------------------------
+                           MEMORY CONSTANTS
+--------------------------------------------------------------------*/
 
-    WaitTime( 1000 );
+/*--------------------------------------------------------------------
+                              VARIABLES
+--------------------------------------------------------------------*/
+static screen*current_screen = nullptr;
 
-    BeginDrawing();
-    ClearBackground(RAYWHITE);
-    DrawRectangle(20, 20, 224, 224, Fade(GREEN, 1));
-    EndDrawing();
+/*--------------------------------------------------------------------
+                                MACROS
+--------------------------------------------------------------------*/
 
-    WaitTime( 1000 );
+/*--------------------------------------------------------------------
+                              PROCEDURES
+--------------------------------------------------------------------*/
+/*********************************************************************
+*
+*   PROCEDURE NAME:
+*       graphics_init
+*
+*   DESCRIPTION:
+*       initilaizes graphic static variables
+*
+*********************************************************************/
+void graphics_init( screen *init_s ){
+    current_screen = init_s;
+}
 
+/*********************************************************************
+*
+*   PROCEDURE NAME:
+*       graphics_main
+*
+*   DESCRIPTION:
+*       runs and processes all graphics events
+*
+*********************************************************************/
+void graphics_main
+    (
+    std::queue<graphics_msg>& events 
+    )
+{
+/*----------------------------------------------------------
+Local variables
+----------------------------------------------------------*/
+
+/*----------------------------------------------------------
+Draw Phase
+----------------------------------------------------------*/
+BeginDrawing();
+current_screen->drawBackground();
+
+/*----------------------------------------------------------
+Proccess outstanding events
+----------------------------------------------------------*/
+while( !events.empty() )
+    {
+    current_screen->drawObj( events.front() );
+    events.pop();
+    }
+
+EndDrawing();
 }

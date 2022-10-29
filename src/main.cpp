@@ -15,13 +15,16 @@
 #include "include/raylib.h"
 
 #include <iostream>
+#include <queue>
 
 #include "graphics_main.hpp"
-#include "input_main.hpp"
-#include "game_main.hpp"
+// #include "input_main.hpp"
+// #include "game_main.hpp"
+//#include "graphics/graphics_msg.hpp"
 
 
 
+std::queue<graphics_msg> graphicsEvents;
 
 /*********************************************************************
 *
@@ -47,7 +50,7 @@ int main(void)
     while ( !WindowShouldClose() )    // Detect window close button or ESC key
         {
         //std::cout << "here";
-        graphics_main();
+        graphics_main( graphicsEvents );
        
         }
 
