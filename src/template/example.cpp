@@ -1,10 +1,10 @@
 /*********************************************************************
 *
 *   NAME:
-*       main_menu.cpp
+*       X.cpp
 *
 *   DESCRIPTION:
-*       main menu class for graphics
+*       X class
 *
 *   Copyright 2022 Nate Lenze
 *
@@ -12,7 +12,7 @@
 /*--------------------------------------------------------------------
                            GENERAL INCLUDES
 --------------------------------------------------------------------*/
-#include "main_menu.hpp"
+#include "X.hpp"
 
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
@@ -37,75 +37,14 @@
 /*--------------------------------------------------------------------
                               PROCEDURES
 --------------------------------------------------------------------*/
-main_menu::main_menu()
-    {
-        //init memory
-        //add background obj
-    }
 
-main_menu::~main_menu()
-    {
-        //clean up memory
-    }
 
 /*********************************************************************
 *
 *   PROCEDURE NAME:
-*       drawBackground
+*       x
 *
 *   DESCRIPTION:
-*       runs through list of objects + backgrounds and draws
+*       x
 *
 *********************************************************************/
-void main_menu::drawBackground( void )
-{
-/*----------------------------------------------------------
-Local variables
-----------------------------------------------------------*/
-
-/*----------------------------------------------------------
-Draw background image first
-----------------------------------------------------------*/
-_currentObjects["background"];
-
-/*----------------------------------------------------------
-Draw Objects
-----------------------------------------------------------*/
-for( auto drawObj : _currentObjects )
-    {
-    if( drawObj.first == "background ")
-        continue;
-    
-    drawObj.second;
-    }
-
-}
-
-void main_menu::handleEvent( graphics_msg event )
-    {
-
-    }
-
-/*********************************************************************
-*
-*   PROCEDURE NAME:
-*       clearAllObj
-*
-*   DESCRIPTION:
-*       clears all objects on the screen except background object
-*
-*********************************************************************/
-void main_menu::clearAllObj( void )
-{
-/*----------------------------------------------------------
-remove objects that are not background
-----------------------------------------------------------*/
-for( auto drawObj : _currentObjects )
-    {
-    if( drawObj.first == "background ")
-        continue;
-    
-    _currentObjects.erase( drawObj.first );
-    }   
-}
-

@@ -74,16 +74,20 @@ Local variables
 Draw Phase
 ----------------------------------------------------------*/
 BeginDrawing();
-current_screen->drawBackground();
 
 /*----------------------------------------------------------
 Proccess outstanding events
 ----------------------------------------------------------*/
 while( !events.empty() )
     {
-    current_screen->drawObj( events.front() );
+    current_screen->handleEvent( events.front() );
     events.pop();
     }
+
+/*----------------------------------------------------------
+Complete Drawing
+----------------------------------------------------------*/
+current_screen->drawBackground();
 
 EndDrawing();
 }

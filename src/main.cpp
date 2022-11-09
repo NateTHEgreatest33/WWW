@@ -18,14 +18,33 @@
 #include <queue>
 
 #include "graphics_main.hpp"
-// #include "input_main.hpp"
-// #include "game_main.hpp"
-//#include "graphics/graphics_msg.hpp"
+#include "input_main.hpp"
+#include "game_main.hpp"
+#include "graphics/graphics_msg.hpp"
+/*--------------------------------------------------------------------
+                          LITERAL CONSTANTS
+--------------------------------------------------------------------*/
 
+/*--------------------------------------------------------------------
+                                TYPES
+--------------------------------------------------------------------*/
 
+/*--------------------------------------------------------------------
+                           MEMORY CONSTANTS
+--------------------------------------------------------------------*/
 
+/*--------------------------------------------------------------------
+                          GLOBAL VARIABLES
+--------------------------------------------------------------------*/
 std::queue<graphics_msg> graphicsEvents;
 
+/*--------------------------------------------------------------------
+                                MACROS
+--------------------------------------------------------------------*/
+
+/*--------------------------------------------------------------------
+                              PROCEDURES
+--------------------------------------------------------------------*/
 /*********************************************************************
 *
 *   PROCEDURE NAME:
@@ -35,26 +54,35 @@ std::queue<graphics_msg> graphicsEvents;
 *       Main loop
 *
 *********************************************************************/
-int main(void)
+int main
+    (
+    void
+    )
 {
+/*----------------------------------------------------------
+Local variables
+----------------------------------------------------------*/
+const int screenWidth = 800;
+const int screenHeight = 450;
 
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+/*----------------------------------------------------------
+Setup inits
+----------------------------------------------------------*/
+InitWindow(screenWidth, screenHeight, "RayLib Example");
+SetTargetFPS(60);
+//graphics_init( );
 
-    InitWindow(screenWidth, screenHeight, "RayLib Example");
-    SetTargetFPS(60);
-
-
+/*----------------------------------------------------------
+Main processing Loop
+----------------------------------------------------------*/
+while ( !WindowShouldClose() )    // Detect window close button or ESC key
+    {
     
+    graphics_main( graphicsEvents );
+    
+    }
 
-    while ( !WindowShouldClose() )    // Detect window close button or ESC key
-        {
-        //std::cout << "here";
-        graphics_main( graphicsEvents );
-       
-        }
+CloseWindow();
 
-    CloseWindow();
-
-    return 0;
+return 0;
 } /* main() */

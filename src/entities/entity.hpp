@@ -1,22 +1,23 @@
 /*********************************************************************
 *
 *   NAME:
-*       screen.hpp
+*       entity.hpp
 *
 *   DESCRIPTION:
-*       background graphics class
+*       entity class
 *
 *   Copyright 2022 Nate Lenze
 *
 *********************************************************************/
-#ifndef SCREEN_HPP
-#define SCREEN_HPP
+#ifndef ENTITY_HPP
+#define ENTITY_HPP
 /*--------------------------------------------------------------------
                            GENERAL INCLUDES
 --------------------------------------------------------------------*/
-#include <iostream>
+#include <any>
+#include <tuple>
+#include <vector>
 
-#include "graphics_msg.hpp"
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
 --------------------------------------------------------------------*/
@@ -24,13 +25,21 @@
 /*--------------------------------------------------------------------
                                 TYPES
 --------------------------------------------------------------------*/
+typedef struct {
+    int x;
+    int y;
+} cords;
 
+typedef struct {
+    cords cordinates;
+    int rad;
+}hitRad;
 /*--------------------------------------------------------------------
                            MEMORY CONSTANTS
 --------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------
-                              VARIABLES
+                          GLOBAL VARIABLES
 --------------------------------------------------------------------*/
 
 /*--------------------------------------------------------------------
@@ -40,19 +49,40 @@
 /*--------------------------------------------------------------------
                               CLASSES
 --------------------------------------------------------------------*/
-class screen 
-    {
-    private:
+class entity
+{
+public:
 
-    public:
-    std::string screen_name;
+    entity(int x, int y, std::vector<hitRad> hitBox, bool visible );
 
-    void virtual drawBackground( void ) = 0;
+    ~entity();
 
-    void virtual handleEvent( graphics_msg event ) = 0;
+    bool collision( entity other );
 
-    void virtual clearAllObj( void ) = 0;
+    std::pair< cords, std::vector<hitRad>> getSpacingInfo( void );
 
-    };
+    cords getCords( void );
+
+    void toggleVisible();
+
+    void setVisible( bool is_visible );
+
+    void getVisible( bool is_visible );
+
+    void setCords( cords cordinates );
+
+//virtual void draw( void ) = 0;
+
+private:
+
+    int p_xPos;
+    int p_yPos;
+    std::vector<hitRad> p_hitPoints;
+    std::any p_image;
+    bool p_visible;
+
+    bool isHit( hitRad& lhs, hitRad& rhs );
+
+};
 
 #endif

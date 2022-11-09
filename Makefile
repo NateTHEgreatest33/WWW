@@ -3,4 +3,5 @@ default:
 	src/graphics_main.cpp \
 	src/input_main.cpp \
 	src/game_main.cpp \
+	src/entities/entity.cpp \
 	-std=c++2a -framework IOKit -framework Cocoa -framework OpenGL `pkg-config --libs --cflags raylib` -o build/RayLibGame
