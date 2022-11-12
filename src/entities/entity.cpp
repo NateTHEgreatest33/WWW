@@ -83,14 +83,13 @@ entity::~entity()
 bool entity::collision( entity other )
 {
 std::pair<cords, std::vector<hitRad>> info = other.getSpacingInfo();
-bool result{0};
+
 for( hitRad hitBox : p_hitPoints )
     {
-    result = std::all_of( info.second.begin(), info.second.end(), [this, &hitBox]( hitRad& current ){return this->isHit( hitBox, current); } );
-
-    if( result )
+    if( std::all_of( info.second.begin(), info.second.end(), [this, &hitBox]( hitRad& current ){return this->isHit( hitBox, current); } ) )
+        {
         return true;
-
+        }
     }
 
 return false;
@@ -108,6 +107,8 @@ return false;
 *********************************************************************/
 std::pair<cords, std::vector<hitRad>> entity::getSpacingInfo( void )
 {
+cords cord( p_xPos, p_yPos );
+return std::make_pair( cord, p_hitPoints );
 
 } /* getSpacingInfo() */
 
@@ -122,17 +123,30 @@ std::pair<cords, std::vector<hitRad>> entity::getSpacingInfo( void )
 *********************************************************************/
 cords entity::getCords( void )
 {
-
+    return cords( p_xPos, p_yPos );
+     
 } /* getCords() */
 
 
-void entity::toggleVisible(){}
+void entity::toggleVisible()
+{
+p_visible = !p_visible;
+}
 
-void entity::setVisible( bool is_visible ){}
+void entity::setVisible( bool is_visible )
+{
+p_visible = is_visible;
+}
 
-void entity::getVisible( bool is_visible ){}
+bool entity::getVisible( void )
+{
+return p_visible;
+}
 
-void entity::setCords( cords cordinates ){}
+void entity::setCords( cords cordinates ){
+    p_xPos = cordinates.x;
+    p_yPos = cordinates.y;
+}
 
 bool entity::isHit( hitRad& lhs, hitRad& rhs )
 {

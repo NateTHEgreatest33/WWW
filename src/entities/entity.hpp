@@ -25,10 +25,12 @@
 /*--------------------------------------------------------------------
                                 TYPES
 --------------------------------------------------------------------*/
-typedef struct {
+typedef struct cords;
+struct cords{
     int x;
     int y;
-} cords;
+    cords(int xIn, int yIn) : x(xIn), y(yIn){}
+};
 
 typedef struct {
     cords cordinates;
@@ -67,7 +69,7 @@ public:
 
     void setVisible( bool is_visible );
 
-    void getVisible( bool is_visible );
+    bool getVisible( void );
 
     void setCords( cords cordinates );
 
