@@ -37,10 +37,10 @@
 /*--------------------------------------------------------------------
                               PROCEDURES
 --------------------------------------------------------------------*/
-main_menu::main_menu()
+main_menu::main_menu( const std::string name, const std::string backgroundPth )
     {
-        //init memory
-        //add background obj
+        screen_name = name;
+        background = LoadImage( backgroundPth.c_str() );//backgroundPth );
     }
 
 main_menu::~main_menu()
@@ -66,17 +66,29 @@ Local variables
 /*----------------------------------------------------------
 Draw background image first
 ----------------------------------------------------------*/
-_currentObjects["background"];
+ClearBackground( BLUE );
+// ImageCrop(&background, (Rectangle){ 100, 10, 300, 300 });      // Crop an image piece
+ImageResize(&background, 100, 100);
+Texture2D texture = LoadTextureFromImage(background);
+// ImageDraw( &background, 
+//             background, 
+//             (Rectangle){ 0, 0, (float)background.width, (float)background.height }, 
+//             (Rectangle){ 30, 40, background.width*1.5f, background.height*1.5f }, 
+//             BLANK );
+//ImageDrawRectangle(&background, 10, 10, 100, 100, RAYWHITE );
+
+DrawCircle( 50, 50, 50.0, RAYWHITE );
+
+DrawTexture(texture, 200, 200, WHITE);
+
+
 
 /*----------------------------------------------------------
 Draw Objects
 ----------------------------------------------------------*/
 for( auto drawObj : _currentObjects )
     {
-    if( drawObj.first == "background ")
-        continue;
-    
-    drawObj.second;
+    drawObj.second.draw();
     }
 
 }
@@ -109,3 +121,9 @@ for( auto drawObj : _currentObjects )
     }   
 }
 
+
+
+
+void main_menu::handleInput( void ){}
+
+void main_menu::handleLogic( void ){}

@@ -21,6 +21,10 @@
 #include "input_main.hpp"
 #include "game_main.hpp"
 #include "graphics/graphics_msg.hpp"
+
+
+#include"graphics/main_menu.hpp"
+#include"graphics/screen.hpp"
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
 --------------------------------------------------------------------*/
@@ -70,7 +74,9 @@ Setup inits
 ----------------------------------------------------------*/
 InitWindow(screenWidth, screenHeight, "RayLib Example");
 SetTargetFPS(60);
-//graphics_init( );
+
+main_menu test( "main menu", "../src/resources/test.png");
+graphics_init( &test );
 
 /*----------------------------------------------------------
 Main processing Loop

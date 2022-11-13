@@ -159,3 +159,8 @@ if( distance < ( lhs.rad + rhs.rad ) )
 
 return false;
 }
+
+
+
+//remove once defined
+void entity::draw( void ){}

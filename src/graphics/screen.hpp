@@ -53,6 +53,10 @@ class screen
 
     void virtual clearAllObj( void ) = 0;
 
+    void virtual handleInput( void ) = 0;
+
+    void virtual handleLogic( void ) = 0;
+
     };
 
 #endif

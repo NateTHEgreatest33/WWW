@@ -17,6 +17,7 @@
 #include <any>
 #include <tuple>
 #include <vector>
+#include "../include/raylib.h"
 
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
@@ -73,7 +74,7 @@ public:
 
     void setCords( cords cordinates );
 
-//virtual void draw( void ) = 0;
+    void virtual draw( void );
 
 private:
 
