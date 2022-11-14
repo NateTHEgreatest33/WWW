@@ -37,14 +37,20 @@
 /*--------------------------------------------------------------------
                               PROCEDURES
 --------------------------------------------------------------------*/
-main_menu::main_menu( const std::string name, const std::string backgroundPth )
+template <typename T>
+main_menu<T>::main_menu(){}
+
+template <typename T>
+main_menu<T>::main_menu( const std::string name, const std::string backgroundPth )
     {
         screen_name = name;
-        background = LoadImage( backgroundPth.c_str() );//backgroundPth );
+        background = LoadImage( backgroundPth.c_str() );
     }
 
-main_menu::~main_menu()
+template <typename T>
+main_menu<T>::~main_menu()
     {
+        std::cout<<"hello world";
         //clean up memory
     }
 
@@ -57,7 +63,8 @@ main_menu::~main_menu()
 *       runs through list of objects + backgrounds and draws
 *
 *********************************************************************/
-void main_menu::drawBackground( void )
+template <typename T>
+void main_menu<T>::drawBackground( void )
 {
 /*----------------------------------------------------------
 Local variables
@@ -93,7 +100,8 @@ for( auto drawObj : _currentObjects )
 
 }
 
-void main_menu::handleEvent( graphics_msg event )
+template <typename T>
+void main_menu<T>::handleEvent( graphics_msg event )
     {
 
     }
@@ -107,7 +115,8 @@ void main_menu::handleEvent( graphics_msg event )
 *       clears all objects on the screen except background object
 *
 *********************************************************************/
-void main_menu::clearAllObj( void )
+template <typename T>
+void main_menu<T>::clearAllObj( void )
 {
 /*----------------------------------------------------------
 remove objects that are not background
@@ -123,7 +132,8 @@ for( auto drawObj : _currentObjects )
 
 
 
+template <typename T>
+void main_menu<T>::handleInput( void ){}
 
-void main_menu::handleInput( void ){}
-
-void main_menu::handleLogic( void ){}
+template <typename T>
+void main_menu<T>::handleLogic( void ){}

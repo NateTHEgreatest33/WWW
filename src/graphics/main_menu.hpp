@@ -18,18 +18,20 @@
 #include "../entities/entity.hpp"
 #include "../include/raylib.h"
 
-
+template <typename T>
 class main_menu : public screen
     {
     private:
     //https://www.educative.io/courses/cpp-standard-library-including-cpp-14-and-cpp-17/gkDqXZlVq4l
     std::unordered_map< std::string, entity > _currentObjects;
-    Image background;
-    public:
-
     std::string screen_name;
+    T background;
+
+    public:
     
     main_menu( std::string name, std::string backgroundPth);
+
+    main_menu();
 
     ~main_menu();
 

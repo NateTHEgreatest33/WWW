@@ -40,12 +40,12 @@
 /*--------------------------------------------------------------------
                               CLASSES
 --------------------------------------------------------------------*/
+
 class screen 
     {
     private:
-
+   
     public:
-    std::string screen_name;
 
     void virtual drawBackground( void ) = 0;
 

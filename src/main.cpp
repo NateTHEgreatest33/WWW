@@ -75,7 +75,8 @@ Setup inits
 InitWindow(screenWidth, screenHeight, "RayLib Example");
 SetTargetFPS(60);
 
-main_menu test( "main menu", "../src/resources/test.png");
+//issues: https://stackoverflow.com/questions/495021/why-can-templates-only-be-implemented-in-the-header-file
+main_menu<Image> test( "main menu", "../src/resources/test.png" );
 graphics_init( &test );
 
 /*----------------------------------------------------------
