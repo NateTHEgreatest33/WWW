@@ -1,7 +1,7 @@
 /*********************************************************************
 *
 *   NAME:
-*       main_menu.cpp
+*       main_menu.tpp
 *
 *   DESCRIPTION:
 *       main menu class for graphics

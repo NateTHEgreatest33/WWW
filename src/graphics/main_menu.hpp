@@ -47,4 +47,5 @@ class main_menu : public screen
 
     };
 
+#include "main_menu.tpp"
 #endif
