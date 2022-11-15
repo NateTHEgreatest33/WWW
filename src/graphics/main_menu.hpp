@@ -25,11 +25,13 @@ class main_menu : public screen
     //https://www.educative.io/courses/cpp-standard-library-including-cpp-14-and-cpp-17/gkDqXZlVq4l
     std::unordered_map< std::string, entity > _currentObjects;
     std::string screen_name;
-    T background;
+    T p_background;
+
+    void drawObjs( void );
 
     public:
     
-    main_menu( std::string name, std::string backgroundPth);
+    main_menu( const std::string name, const std::any background );
 
     main_menu();
 

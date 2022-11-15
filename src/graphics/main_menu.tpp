@@ -38,13 +38,27 @@
                               PROCEDURES
 --------------------------------------------------------------------*/
 template <typename T>
-main_menu<T>::main_menu(){}
+main_menu<T>::main_menu()
+    {
+        std::cout<<"hello world";
+        //clean up memory
+    }
 
-template <typename T>
-main_menu<T>::main_menu( const std::string name, const std::string backgroundPth )
+
+template <>
+main_menu<Image>::main_menu( const std::string name, const std::any background )
     {
         screen_name = name;
-        background = LoadImage( backgroundPth.c_str() );
+        assert( background.type() != typeid(std::string) );
+        p_background = LoadImage( std::any_cast<std::string>(background).c_str() );
+    }
+
+template <>
+main_menu<Color>::main_menu( const std::string name, const std::any background )
+    {
+        assert( background.type() != typeid(Color) );
+        screen_name = name;
+        p_background = std::any_cast<Color>(background);
     }
 
 template <typename T>
@@ -64,7 +78,10 @@ main_menu<T>::~main_menu()
 *
 *********************************************************************/
 template <typename T>
-void main_menu<T>::drawBackground( void )
+void main_menu<T>::drawBackground( void ){}
+
+template <>
+void main_menu<Image>::drawBackground( void )
 {
 /*----------------------------------------------------------
 Local variables
@@ -75,8 +92,8 @@ Draw background image first
 ----------------------------------------------------------*/
 ClearBackground( BLUE );
 // ImageCrop(&background, (Rectangle){ 100, 10, 300, 300 });      // Crop an image piece
-ImageResize(&background, 100, 100);
-Texture2D texture = LoadTextureFromImage(background);
+ImageResize(&p_background, 100, 100);
+Texture2D texture = LoadTextureFromImage(p_background);
 // ImageDraw( &background, 
 //             background, 
 //             (Rectangle){ 0, 0, (float)background.width, (float)background.height }, 
@@ -88,15 +105,7 @@ DrawCircle( 50, 50, 50.0, RAYWHITE );
 
 DrawTexture(texture, 200, 200, WHITE);
 
-
-
-/*----------------------------------------------------------
-Draw Objects
-----------------------------------------------------------*/
-for( auto drawObj : _currentObjects )
-    {
-    drawObj.second.draw();
-    }
+drawObjs();
 
 }
 
@@ -137,3 +146,17 @@ void main_menu<T>::handleInput( void ){}
 
 template <typename T>
 void main_menu<T>::handleLogic( void ){}
+
+
+template<typename T>
+void main_menu<T>::drawObjs( void )
+{
+/*----------------------------------------------------------
+Draw Objects
+----------------------------------------------------------*/
+for( auto drawObj : _currentObjects )
+    {
+    drawObj.second.draw();
+    }
+
+}
