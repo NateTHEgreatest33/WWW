@@ -1,23 +1,18 @@
 /*********************************************************************
 *
 *   NAME:
-*       entity.hpp
+*       button.cpp
 *
 *   DESCRIPTION:
-*       entity class
+*       button class
 *
 *   Copyright 2022 Nate Lenze
 *
 *********************************************************************/
-#ifndef ENTITY_HPP
-#define ENTITY_HPP
 /*--------------------------------------------------------------------
                            GENERAL INCLUDES
 --------------------------------------------------------------------*/
-#include <any>
-#include <tuple>
-#include <vector>
-#include "../include/raylib.h"
+#include "button.hpp"
 
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
@@ -26,17 +21,7 @@
 /*--------------------------------------------------------------------
                                 TYPES
 --------------------------------------------------------------------*/
-typedef struct cords;
-struct cords{
-    int x;
-    int y;
-    cords(int xIn, int yIn) : x(xIn), y(yIn){}
-};
 
-typedef struct {
-    cords cordinates;
-    int rad;
-}hitRad;
 /*--------------------------------------------------------------------
                            MEMORY CONSTANTS
 --------------------------------------------------------------------*/
@@ -52,47 +37,20 @@ typedef struct {
 /*--------------------------------------------------------------------
                               CLASSES
 --------------------------------------------------------------------*/
-class entity
+
+button::button( int x, int y, int length, int height, Color color, std::string name, std::string text ) : entity( x, y, std::vector<hitRad>(), true, name )
 {
-public:
 
-    entity(int x, int y, std::vector<hitRad> hitBox, bool visible, std::string name );
+}
 
-    ~entity();
+button::~button(){}
 
-    bool collision( entity other );
+void button::draw( void ){}
 
-    std::pair< cords, std::vector<hitRad>> getSpacingInfo( void );
+void button::actionKeyboard( KeyboardKey action ){}
 
-    cords getCords( void );
+void button::actionMouse( GamepadButton action ){}
 
-    void toggleVisible();
+void button::actionGamepad( MouseButton action ){}
 
-    void setVisible( bool is_visible );
 
-    bool getVisible( void );
-
-    void setCords( cords cordinates );
-
-    void setHitbox( std::vector<hitRad> hitBox );
-
-    void virtual draw( void );
-    void virtual actionKeyboard( KeyboardKey action );
-    void virtual actionMouse( GamepadButton action );
-    void virtual actionGamepad( MouseButton action );
-
-private:
-
-    int p_xPos;
-    int p_yPos;
-    std::vector<hitRad> p_hitPoints;
-    std::any p_image;
-    bool p_visible;
-
-    std::string p_name;
-
-    bool isHit( hitRad& lhs, hitRad& rhs );
-
-};
-
-#endif
