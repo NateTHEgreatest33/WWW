@@ -91,6 +91,8 @@
 		"ios": "cpp",
 		"locale": "cpp",
 		"queue": "cpp",
-		"any": "cpp"
-	}
+		"any": "cpp",
+		"*.tpp": "cpp"
+	},
+	//"C_Cpp.errorSquiggles": "Disabled"
 }
