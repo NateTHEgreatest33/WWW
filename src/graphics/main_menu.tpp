@@ -46,11 +46,12 @@ main_menu<T>::main_menu()
 
 
 template <>
-main_menu<Image>::main_menu( const std::string name, const std::any background )
+main_menu<Image>::main_menu( const std::string name, std::any background )
     {
         screen_name = name;
         assert( background.type() != typeid(std::string) );
-        p_background = LoadImage( std::any_cast<std::string>(background).c_str() );
+        p_background = LoadImage( std::any_cast< const char* >(background) );
+
     }
 
 template <>
