@@ -17,6 +17,7 @@
 #include <any>
 #include <tuple>
 #include <vector>
+#include <iostream>
 #include "../include/raylib.h"
 
 /*--------------------------------------------------------------------
@@ -88,7 +89,6 @@ private:
     std::vector<hitRad> p_hitPoints;
     std::any p_image;
     bool p_visible;
-
     std::string p_name;
 
     bool isHit( hitRad& lhs, hitRad& rhs );

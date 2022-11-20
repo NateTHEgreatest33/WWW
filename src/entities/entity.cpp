@@ -49,12 +49,13 @@
 *       entity class constructor
 *
 *********************************************************************/
-entity::entity(int x, int y, std::vector<hitRad> hitBox, bool visible )
+entity::entity(int x, int y, std::vector<hitRad> hitBox, bool visible, std::string name )
 {
 p_xPos      = x;
 p_yPos      = y;
 p_hitPoints = hitBox;
 p_visible   = visible;
+p_name      = name;
 } /* entity() */
 
 /*********************************************************************
@@ -164,3 +165,6 @@ return false;
 
 //remove once defined
 void entity::draw( void ){}
+void entity::actionKeyboard( KeyboardKey action ){}
+void entity::actionMouse( GamepadButton action ){}
+void entity::actionGamepad( MouseButton action ){}
