@@ -72,12 +72,11 @@ const int screenHeight = 450;
 /*----------------------------------------------------------
 Setup inits
 ----------------------------------------------------------*/
-InitWindow(screenWidth, screenHeight, "RayLib Example");
+InitWindow(screenWidth, screenHeight, "Balloon Tower Offense");
 SetTargetFPS(60);
 
-//issues: https://stackoverflow.com/questions/495021/why-can-templates-only-be-implemented-in-the-header-file
-main_menu<Image> test( "main menu", "../src/resources/test.png" );
-graphics_init( &test );
+main_menu<Image> backgroundImage( "main menu", "../src/resources/test.png" );
+graphics_init( &backgroundImage );
 
 /*----------------------------------------------------------
 Main processing Loop

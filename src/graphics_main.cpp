@@ -85,7 +85,7 @@ while( !events.empty() )
     }
 
 /*----------------------------------------------------------
-Complete Drawing
+Draw screen
 ----------------------------------------------------------*/
 current_screen->drawBackground();
 
