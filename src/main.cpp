@@ -75,7 +75,7 @@ Setup inits
 InitWindow(screenWidth, screenHeight, "Balloon Tower Offense");
 SetTargetFPS(60);
 
-main_menu<Image> backgroundImage( "main menu", "../src/resources/test.png" );
+main_menu<Image> backgroundImage( "main menu", "/Users/natelenze/GitHub/WWW/src/resources/test.png");//"../../src/resources/test.png" );
 graphics_init( &backgroundImage );
 
 /*----------------------------------------------------------
