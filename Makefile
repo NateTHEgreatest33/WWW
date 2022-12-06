@@ -10,7 +10,7 @@ LFLAGS = -framework IOKit -framework Cocoa -framework OpenGL `pkg-config --libs 
 debug: main.o graphics_main.o input_main.o game_main.o entity.o
 	$(COMP) main.o graphics_main.o input_main.o game_main.o entity.o ${LFLAGS} -o build/debug/BalloonTowerOffense
 
-output: main.o graphics_main.o input_main.o game_main.o entity.o
+release: main.o graphics_main.o input_main.o game_main.o entity.o
 	$(COMP) main.o graphics_main.o input_main.o game_main.o entity.o ${LFLAGS} -o build/release/BalloonTowerOffense
 
 main.o: src/main.cpp
@@ -28,8 +28,7 @@ game_main.o: src/game_main.cpp src/game_main.hpp
 entity.o: src/entities/entity.cpp src/entities/entity.hpp
 	$(COMP) -c src/entities/entity.cpp $(CFLAGS) 
 
-# main_menu.o: src/graphics/main_menu.hpp src/graphics/main_menu.tpp
-# 	g++ -c src/graphics/main_menu.hpp $(CFLAGS) 
+
 
 clean:
 	rm *.o

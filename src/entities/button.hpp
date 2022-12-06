@@ -52,10 +52,13 @@ public:
     ~button();
     void draw( void );
     void actionKeyboard( KeyboardKey action );
-    void actionMouse( GamepadButton action );
-    void actionGamepad( MouseButton action );
+    void actionMouse( MouseButton action );
+    void actionGamepad( GamepadButton action );
 
 private:
+    int p_length;
+    int p_height;
+    Color p_color;
 
     std::unordered_map< KeyboardKey, std::function<void>() > p_keyboardFunction;
     std::unordered_map< MouseButton, std::function<void>() > p_mouseFunction;
