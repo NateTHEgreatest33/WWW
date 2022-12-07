@@ -18,6 +18,7 @@
 
 #include <unordered_map>
 #include <functional>
+#include <any>
 #include <iostream>
 
 #include "../include/raylib.h"
@@ -55,14 +56,18 @@ public:
     void actionMouse( MouseButton action );
     void actionGamepad( GamepadButton action );
 
+    void initKeyboard( std::vector< std::pair< KeyboardKey, std::function<void()> > > inputList );
+    void initMouse( std::vector< std::pair< MouseButton, std::function<void()> > > inputList );
+    void initGamepad( std::vector< std::pair< GamepadButton, std::function<void()> > > inputList );
+
 private:
     int p_length;
     int p_height;
     Color p_color;
 
-    std::unordered_map< KeyboardKey, std::function<void>() > p_keyboardFunction;
-    std::unordered_map< MouseButton, std::function<void>() > p_mouseFunction;
-    std::unordered_map< GamepadButton, std::function<void>() > p_gamepadFunction;
+    std::unordered_map< KeyboardKey, std::function<void()> > p_keyboardFunction;
+    std::unordered_map< MouseButton, std::function<void()> > p_mouseFunction;
+    std::unordered_map< GamepadButton, std::function<void()> > p_gamepadFunction;
 
 };
 

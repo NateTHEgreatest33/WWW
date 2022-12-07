@@ -41,3 +41,4 @@ src/include/raylib/*
 # compules raylib lib
 src/lib/*
 build/RayLibGame
+build/debug/BalloonTowerOffense

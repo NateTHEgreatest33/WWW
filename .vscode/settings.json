@@ -92,7 +92,8 @@
 		"locale": "cpp",
 		"queue": "cpp",
 		"any": "cpp",
-		"*.tpp": "cpp"
+		"*.tpp": "cpp",
+		"variant": "cpp"
 	},
 	//"C_Cpp.errorSquiggles": "Disabled"
 }

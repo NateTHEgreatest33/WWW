@@ -68,3 +68,26 @@ void button::actionGamepad( GamepadButton action ){
 }
 
 
+void button::initKeyboard( std::vector< std::pair< KeyboardKey, std::function<void()> > > inputList )
+{
+for( auto i : inputList )
+    {
+    p_keyboardFunction[ i.first ] = i.second;
+    }
+}
+
+void button::initMouse( std::vector< std::pair< MouseButton, std::function<void()> > > inputList )
+{
+for( auto i : inputList )
+    {
+    p_mouseFunction[ i.first ] = i.second;
+    }
+}
+
+void button::initGamepad( std::vector< std::pair< GamepadButton, std::function<void()> > > inputList )
+{
+for( auto i : inputList )
+    {
+    p_gamepadFunction[ i.first ] = i.second;
+    }
+}

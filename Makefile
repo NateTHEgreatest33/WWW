@@ -7,11 +7,11 @@ CFLAGS = -std=c++2a -g
 #linker flags
 LFLAGS = -framework IOKit -framework Cocoa -framework OpenGL `pkg-config --libs --cflags raylib`
 
-debug: main.o graphics_main.o input_main.o game_main.o entity.o
-	$(COMP) main.o graphics_main.o input_main.o game_main.o entity.o ${LFLAGS} -o build/debug/BalloonTowerOffense
+debug: main.o graphics_main.o input_main.o game_main.o entity.o button.o
+	$(COMP) main.o graphics_main.o input_main.o game_main.o entity.o button.o ${LFLAGS} -o build/debug/BalloonTowerOffense
 
-release: main.o graphics_main.o input_main.o game_main.o entity.o
-	$(COMP) main.o graphics_main.o input_main.o game_main.o entity.o ${LFLAGS} -o build/release/BalloonTowerOffense
+release: main.o graphics_main.o input_main.o game_main.o entity.o button.o
+	$(COMP) main.o graphics_main.o input_main.o game_main.o entity.o button.o ${LFLAGS} -o build/release/BalloonTowerOffense
 
 main.o: src/main.cpp
 	$(COMP) -c src/main.cpp $(CFLAGS) 
@@ -28,7 +28,8 @@ game_main.o: src/game_main.cpp src/game_main.hpp
 entity.o: src/entities/entity.cpp src/entities/entity.hpp
 	$(COMP) -c src/entities/entity.cpp $(CFLAGS) 
 
-
+button.o: src/entities/button.cpp src/entities/button.hpp
+	$(COMP) -c src/entities/button.cpp $(CFLAGS) 
 
 clean:
 	rm *.o
