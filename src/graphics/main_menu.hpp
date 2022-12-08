@@ -26,12 +26,14 @@ class main_menu : public screen
     std::unordered_map< std::string, entity > _currentObjects;
     std::string screen_name;
     T p_background;
+    int screenHeight;
+    int screenWidth;
 
     void drawObjs( void );
 
     public:
     
-    main_menu( const std::string name, const std::any background );
+    main_menu( const std::string name, const std::any background, int screenH, int screenW );
 
     main_menu();
 
@@ -40,6 +42,8 @@ class main_menu : public screen
     void drawBackground( void );
 
     void handleEvent( graphics_msg event );
+    
+    void addObj( entity obj );
 
     void clearAllObj( void );
 

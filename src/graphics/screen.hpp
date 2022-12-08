@@ -17,6 +17,7 @@
 #include <iostream>
 
 #include "graphics_msg.hpp"
+#include "../entities/entity.hpp"
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
 --------------------------------------------------------------------*/
@@ -52,6 +53,8 @@ class screen
     void virtual handleEvent( graphics_msg event ) = 0;
 
     void virtual clearAllObj( void ) = 0;
+
+    void virtual addObj( entity obj ) = 0;
 
     void virtual handleInput( void ) = 0;
 

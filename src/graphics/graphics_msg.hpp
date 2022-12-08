@@ -18,7 +18,7 @@
 typedef int graphic_type;
 enum{
     GRAPHIC_SCREEN,
-    GRAPHIC_ITEM,
+    GRAPHIC_ENTITY,
     GRAPHIC_OTHER,
 
     GRAPHICS_NUM

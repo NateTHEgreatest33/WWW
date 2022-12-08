@@ -46,20 +46,25 @@ main_menu<T>::main_menu()
 
 
 template <>
-main_menu<Image>::main_menu( const std::string name, std::any background )
+main_menu<Image>::main_menu( const std::string name, const std::any background, int screenH, int screenW )
     {
         screen_name = name;
         assert( background.type() != typeid(std::string) );
         p_background = LoadImage( std::any_cast< const char* >(background) );
 
+        screenHeight = screenH;
+        screenWidth  = screenW;
     }
 
 template <>
-main_menu<Color>::main_menu( const std::string name, const std::any background )
+main_menu<Color>::main_menu( const std::string name, const std::any background, int screenH, int screenW )
     {
         assert( background.type() != typeid(Color) );
         screen_name = name;
         p_background = std::any_cast<Color>(background);
+
+        screenHeight = screenH;
+        screenWidth  = screenW;
     }
 
 template <typename T>
@@ -78,8 +83,20 @@ main_menu<T>::~main_menu()
 *       runs through list of objects + backgrounds and draws
 *
 *********************************************************************/
-template <typename T>
-void main_menu<T>::drawBackground( void ){}
+template <>
+void main_menu<Color>::drawBackground( void )
+{
+/*----------------------------------------------------------
+Local variables
+----------------------------------------------------------*/
+
+/*----------------------------------------------------------
+Draw background image first
+----------------------------------------------------------*/
+ClearBackground( p_background );
+drawObjs();
+
+}
 
 template <>
 void main_menu<Image>::drawBackground( void )
@@ -92,19 +109,9 @@ Local variables
 Draw background image first
 ----------------------------------------------------------*/
 ClearBackground( BLUE );
-// ImageCrop(&background, (Rectangle){ 100, 10, 300, 300 });      // Crop an image piece
-ImageResize(&p_background, 100, 100);
+ImageResize(&p_background, screenWidth, screenHeight);
 Texture2D texture = LoadTextureFromImage(p_background);
-// ImageDraw( &background, 
-//             background, 
-//             (Rectangle){ 0, 0, (float)background.width, (float)background.height }, 
-//             (Rectangle){ 30, 40, background.width*1.5f, background.height*1.5f }, 
-//             BLANK );
-//ImageDrawRectangle(&background, 10, 10, 100, 100, RAYWHITE );
-
-DrawCircle( 50, 50, 50.0, RAYWHITE );
-
-DrawTexture(texture, 200, 200, WHITE);
+DrawTexture(texture, 0, 0, WHITE);
 
 drawObjs();
 
@@ -113,6 +120,18 @@ drawObjs();
 template <typename T>
 void main_menu<T>::handleEvent( graphics_msg event )
     {
+    switch( event.type )
+        {
+        case GRAPHIC_SCREEN:
+            //p_background = std::any_cast<T>(event.graphic);
+            break;            
+        case GRAPHIC_ENTITY:
+            //_currentObjects[ event.id ] = std::any_cast<entity*>(event.graphic);
+            break;
+        case GRAPHIC_OTHER:
+        default:
+            break;
+        }
 
     }
 
@@ -147,6 +166,9 @@ void main_menu<T>::handleInput( void ){}
 
 template <typename T>
 void main_menu<T>::handleLogic( void ){}
+
+template<typename T>
+void main_menu<T>::addObj( entity obj ){}
 
 
 template<typename T>
