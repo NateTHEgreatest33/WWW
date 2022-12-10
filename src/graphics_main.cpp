@@ -78,6 +78,7 @@ BeginDrawing();
 /*----------------------------------------------------------
 Proccess outstanding events
 ----------------------------------------------------------*/
+
 while( !events.empty() )
     {
     current_screen->handleEvent( events.front() );

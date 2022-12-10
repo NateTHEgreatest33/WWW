@@ -113,10 +113,10 @@ void main_menu<T>::handleEvent( graphics_msg event )
     switch( event.type )
         {
         case GRAPHIC_SCREEN:
-            //p_background = std::any_cast<T>(event.graphic);
+            p_background = std::any_cast<T>(event.graphic);
             break;            
         case GRAPHIC_ENTITY:
-            //p_currentObjects[ event.id ] = std::any_cast<entity*>(event.graphic);
+            p_currentObjects[ event.id ] = std::any_cast<entity*>(event.graphic);
             break;
         case GRAPHIC_OTHER:
         default:
@@ -158,7 +158,7 @@ template <typename T>
 void main_menu<T>::handleLogic( void ){}
 
 template<typename T>
-void main_menu<T>::addObj( std::string id, entity obj ){
+void main_menu<T>::addObj( std::string id, entity* obj ){
     gameplay::warning( (p_currentObjects.count( id ) > 0), "replacing ID");
     p_currentObjects[ id ] = obj;
 }
@@ -172,7 +172,7 @@ Draw Objects
 ----------------------------------------------------------*/
 for( auto drawObj : p_currentObjects )
     {
-    drawObj.second.draw();
+    drawObj.second->draw();
     }
 
 }

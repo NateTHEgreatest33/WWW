@@ -88,9 +88,9 @@ entity::~entity()
 *       determines if entity passed in has hit 
 *
 *********************************************************************/
-bool entity::collision( entity other )
+bool entity::collision( entity* other )
 {
-std::pair<cords, std::vector<hitRad>> info = other.getSpacingInfo();
+std::pair<cords, std::vector<hitRad>> info = other->getSpacingInfo();
 
 for( hitRad hitBox : p_hitPoints )
     {
@@ -169,7 +169,7 @@ return false;
 
 
 //remove once defined
-void entity::draw( void ){}
+//void entity::draw( void ){}
 void entity::actionKeyboard( KeyboardKey action ){}
 void entity::actionMouse( GamepadButton action ){}
 void entity::actionGamepad( MouseButton action ){}

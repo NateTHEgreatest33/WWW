@@ -62,7 +62,7 @@ public:
 
     ~entity();
 
-    bool collision( entity other );
+    bool collision( entity* other );
 
     std::pair< cords, std::vector<hitRad> > getSpacingInfo( void );
 
@@ -78,7 +78,7 @@ public:
 
     void setHitbox( std::vector<hitRad> hitBox );
 
-    void virtual draw( void );
+    void virtual draw( void ) = 0;
     void virtual actionKeyboard( KeyboardKey action );
     void virtual actionMouse( GamepadButton action );
     void virtual actionGamepad( MouseButton action );

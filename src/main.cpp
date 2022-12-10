@@ -25,6 +25,8 @@
 
 #include"graphics/main_menu.hpp"
 #include"graphics/screen.hpp"
+#include "entities/button.hpp"
+#include "entities/entity.hpp"
 
 #include "utl/utl.hpp"
 /*--------------------------------------------------------------------
@@ -81,8 +83,10 @@ gameplay::warning( true, "hello world");
 
 screen *backgroundImage = new main_menu<Image>("main menu", LoadImage("/Users/natelenze/GitHub/WWW/src/resources/test.png"), screenHeight, screenWidth );//"../../src/resources/test.png" );
 graphics_init( backgroundImage );
-//main_menu<Image> backgroundImage( "main menu", "/Users/natelenze/GitHub/WWW/src/resources/test.png", screenHeight, screenWidth );//"../../src/resources/test.png" );
-//graphics_init( &backgroundImage );
+entity *newButton = new button( 10, 10, 100, 100, GREEN, "newButton", "hello world" );
+
+graphics_msg test( GRAPHIC_ENTITY, std::string("button1"), newButton );
+graphicsEvents.push( test );
 
 /*----------------------------------------------------------
 Main processing Loop

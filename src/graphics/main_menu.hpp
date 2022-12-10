@@ -23,7 +23,7 @@ class main_menu : public screen
     {
     private:
     //https://www.educative.io/courses/cpp-standard-library-including-cpp-14-and-cpp-17/gkDqXZlVq4l
-    std::unordered_map< std::string, entity > p_currentObjects;
+    std::unordered_map< std::string, entity* > p_currentObjects;
     std::string p_screen_name;
     T p_background;
     int screenHeight;
@@ -43,7 +43,7 @@ class main_menu : public screen
 
     void handleEvent( graphics_msg event );
     
-    void addObj( std::string id, entity obj );
+    void addObj( std::string id, entity* obj );
 
     void clearAllObj( void );
 

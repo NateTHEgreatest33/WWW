@@ -8,7 +8,7 @@ void warning( bool compare, std::string s )
     {
     if( compare )
         {
-        std::cout << "Warning: "<< s << std::endl;
+        std::cout << "WARNING: "<< s << std::endl;
         }
     }
 
