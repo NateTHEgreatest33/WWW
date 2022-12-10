@@ -13,7 +13,6 @@
                            GENERAL INCLUDES
 --------------------------------------------------------------------*/
 #include "button.hpp"
-#include "../utl/utl.hpp"
 
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
@@ -51,7 +50,6 @@ button::~button(){}
 void button::draw( void ){
     auto cord = getCords();
     DrawRectangle(  cord.x, cord.y, p_length, p_height, p_color );
-    gameplay::warning( true, "GOT HERE" );
 }
 
 void button::actionKeyboard( KeyboardKey action ){
