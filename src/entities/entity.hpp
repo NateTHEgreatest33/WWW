@@ -15,7 +15,7 @@
                            GENERAL INCLUDES
 --------------------------------------------------------------------*/
 #include <any>
-#include <tuple>
+#include <utility>
 #include <vector>
 #include <iostream>
 #include "../include/raylib.h"
@@ -27,13 +27,12 @@
 /*--------------------------------------------------------------------
                                 TYPES
 --------------------------------------------------------------------*/
-typedef struct cords;
-struct cords{
+typedef struct cords{
     int x;
     int y;
     cords(int xIn, int yIn) : x(xIn), y(yIn){}
-};
-
+    cords() : x(0), y(0){}
+}cords;
 typedef struct {
     cords cordinates;
     int rad;
@@ -57,17 +56,19 @@ class entity
 {
 public:
 
-    entity(int x, int y, std::vector<hitRad> hitBox, bool visible, std::string name );
+    entity();
+
+    entity( cords cordinates, std::vector<hitRad> hitBox, bool visible, std::string name );
 
     ~entity();
 
     bool collision( entity other );
 
-    std::pair< cords, std::vector<hitRad>> getSpacingInfo( void );
+    std::pair< cords, std::vector<hitRad> > getSpacingInfo( void );
 
     cords getCords( void );
 
-    void toggleVisible();
+    void toggleVisible( void );
 
     void setVisible( bool is_visible );
 
@@ -84,8 +85,7 @@ public:
 
 private:
 
-    int p_xPos;
-    int p_yPos;
+    cords p_cordinates;
     std::vector<hitRad> p_hitPoints;
     std::any p_image;
     bool p_visible;

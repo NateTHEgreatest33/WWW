@@ -38,7 +38,7 @@
                               CLASSES
 --------------------------------------------------------------------*/
 
-button::button( int x, int y, int height, int length, Color color, std::string name, std::string text ) : entity( x, y, std::vector<hitRad>(), true, name )
+button::button( int x, int y, int height, int length, Color color, std::string name, std::string text ) : entity( cords( x, y ), std::vector<hitRad>(), true, name )
 {
     p_height = height;
     p_length = length;

@@ -25,6 +25,8 @@
 
 #include"graphics/main_menu.hpp"
 #include"graphics/screen.hpp"
+
+#include "utl/utl.hpp"
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
 --------------------------------------------------------------------*/
@@ -75,11 +77,12 @@ Setup inits
 InitWindow(screenWidth, screenHeight, "Balloon Tower Offense");
 SetTargetFPS(60);
 
-main_menu<Image> backgroundImage( "main menu", 
-                                  "/Users/natelenze/GitHub/WWW/src/resources/test.png",
-                                  screenHeight,
-                                  screenWidth );//"../../src/resources/test.png" );
-graphics_init( &backgroundImage );
+gameplay::warning( true, "hello world");
+
+screen *backgroundImage = new main_menu<Image>("main menu", LoadImage("/Users/natelenze/GitHub/WWW/src/resources/test.png"), screenHeight, screenWidth );//"../../src/resources/test.png" );
+graphics_init( backgroundImage );
+//main_menu<Image> backgroundImage( "main menu", "/Users/natelenze/GitHub/WWW/src/resources/test.png", screenHeight, screenWidth );//"../../src/resources/test.png" );
+//graphics_init( &backgroundImage );
 
 /*----------------------------------------------------------
 Main processing Loop

@@ -7,13 +7,13 @@ CFLAGS = -std=c++2a -g
 #linker flags
 LFLAGS = -framework IOKit -framework Cocoa -framework OpenGL `pkg-config --libs --cflags raylib`
 
-debug: main.o graphics_main.o input_main.o game_main.o entity.o button.o
-	$(COMP) main.o graphics_main.o input_main.o game_main.o entity.o button.o ${LFLAGS} -o build/debug/BalloonTowerOffense
+debug: main.o graphics_main.o input_main.o game_main.o entity.o button.o utl.o 
+	$(COMP) main.o graphics_main.o input_main.o game_main.o entity.o button.o utl.o ${LFLAGS} -o build/debug/BalloonTowerOffense
 
-release: main.o graphics_main.o input_main.o game_main.o entity.o button.o
-	$(COMP) main.o graphics_main.o input_main.o game_main.o entity.o button.o ${LFLAGS} -o build/release/BalloonTowerOffense
+release: main.o graphics_main.o input_main.o game_main.o entity.o button.o utl.o
+	$(COMP) main.o graphics_main.o input_main.o game_main.o entity.o button.o utl.o ${LFLAGS} -o build/release/BalloonTowerOffense
 
-main.o: src/main.cpp
+main.o: src/main.cpp src/graphics/main_menu.tpp
 	$(COMP) -c src/main.cpp $(CFLAGS) 
 
 graphics_main.o: src/graphics_main.cpp src/graphics_main.hpp
@@ -30,6 +30,11 @@ entity.o: src/entities/entity.cpp src/entities/entity.hpp
 
 button.o: src/entities/button.cpp src/entities/button.hpp
 	$(COMP) -c src/entities/button.cpp $(CFLAGS) 
+
+utl.o: src/utl/utl.cpp src/utl/utl.hpp
+	$(COMP) -c src/utl/utl.cpp $(CFLAGS) 
+
+#did you remember to add *.o file to debug or relase job?
 
 clean:
 	rm *.o

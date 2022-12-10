@@ -13,6 +13,7 @@
                            GENERAL INCLUDES
 --------------------------------------------------------------------*/
 #include "main_menu.hpp"
+#include "../utl/utl.hpp"
 
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
@@ -45,27 +46,16 @@ main_menu<T>::main_menu()
     }
 
 
-template <>
-main_menu<Image>::main_menu( const std::string name, const std::any background, int screenH, int screenW )
+template <typename T>
+main_menu<T>::main_menu( const std::string name, T background, int screenH, int screenW )
     {
-        screen_name = name;
-        assert( background.type() != typeid(std::string) );
-        p_background = LoadImage( std::any_cast< const char* >(background) );
+        p_screen_name = name;
+        p_background = background;
 
         screenHeight = screenH;
         screenWidth  = screenW;
     }
 
-template <>
-main_menu<Color>::main_menu( const std::string name, const std::any background, int screenH, int screenW )
-    {
-        assert( background.type() != typeid(Color) );
-        screen_name = name;
-        p_background = std::any_cast<Color>(background);
-
-        screenHeight = screenH;
-        screenWidth  = screenW;
-    }
 
 template <typename T>
 main_menu<T>::~main_menu()
@@ -126,7 +116,7 @@ void main_menu<T>::handleEvent( graphics_msg event )
             //p_background = std::any_cast<T>(event.graphic);
             break;            
         case GRAPHIC_ENTITY:
-            //_currentObjects[ event.id ] = std::any_cast<entity*>(event.graphic);
+            //p_currentObjects[ event.id ] = std::any_cast<entity*>(event.graphic);
             break;
         case GRAPHIC_OTHER:
         default:
@@ -150,12 +140,12 @@ void main_menu<T>::clearAllObj( void )
 /*----------------------------------------------------------
 remove objects that are not background
 ----------------------------------------------------------*/
-for( auto drawObj : _currentObjects )
+for( auto drawObj : p_currentObjects )
     {
     if( drawObj.first == "background ")
         continue;
     
-    _currentObjects.erase( drawObj.first );
+    p_currentObjects.erase( drawObj.first );
     }   
 }
 
@@ -168,7 +158,10 @@ template <typename T>
 void main_menu<T>::handleLogic( void ){}
 
 template<typename T>
-void main_menu<T>::addObj( entity obj ){}
+void main_menu<T>::addObj( std::string id, entity obj ){
+    gameplay::warning( (p_currentObjects.count( id ) > 0), "replacing ID");
+    p_currentObjects[ id ] = obj;
+}
 
 
 template<typename T>
@@ -177,7 +170,7 @@ void main_menu<T>::drawObjs( void )
 /*----------------------------------------------------------
 Draw Objects
 ----------------------------------------------------------*/
-for( auto drawObj : _currentObjects )
+for( auto drawObj : p_currentObjects )
     {
     drawObj.second.draw();
     }

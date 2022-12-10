@@ -29,7 +29,7 @@ typedef struct
     {
     graphic_type type;
     std::string id;
-    std::any *graphic;
+    std::any *graphic; //this should be a shared or unique ptr? that way when the graphics item is cleared or done, its cleared. 
     } graphics_msg;
 
 

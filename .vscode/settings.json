@@ -93,7 +93,8 @@
 		"queue": "cpp",
 		"any": "cpp",
 		"*.tpp": "cpp",
-		"variant": "cpp"
+		"variant": "cpp",
+		"entity.hpp": "c"
 	},
 	//"C_Cpp.errorSquiggles": "Disabled"
 }

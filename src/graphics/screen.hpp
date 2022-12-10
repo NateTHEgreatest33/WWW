@@ -54,7 +54,8 @@ class screen
 
     void virtual clearAllObj( void ) = 0;
 
-    void virtual addObj( entity obj ) = 0;
+    //void virtual addObj( std::string id, entity obj ) = 0;
+    void virtual addObj( std::string id, entity obj ) = 0;
 
     void virtual handleInput( void ) = 0;
 

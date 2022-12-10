@@ -49,14 +49,21 @@
 *       entity class constructor
 *
 *********************************************************************/
-entity::entity(int x, int y, std::vector<hitRad> hitBox, bool visible, std::string name )
+entity::entity( cords cordinates, std::vector<hitRad> hitBox, bool visible, std::string name )
 {
-p_xPos      = x;
-p_yPos      = y;
+p_cordinates = cordinates;
 p_hitPoints = hitBox;
 p_visible   = visible;
 p_name      = name;
 } /* entity() */
+
+entity::entity()
+{
+p_cordinates = cords(0,0);
+p_visible = false;
+p_name = "placeholder";
+
+}
 
 /*********************************************************************
 *
@@ -108,8 +115,7 @@ return false;
 *********************************************************************/
 std::pair<cords, std::vector<hitRad>> entity::getSpacingInfo( void )
 {
-cords cord( p_xPos, p_yPos );
-return std::make_pair( cord, p_hitPoints );
+return std::make_pair( p_cordinates, p_hitPoints );
 
 } /* getSpacingInfo() */
 
@@ -124,7 +130,7 @@ return std::make_pair( cord, p_hitPoints );
 *********************************************************************/
 cords entity::getCords( void )
 {
-    return cords( p_xPos, p_yPos );
+    return p_cordinates;
      
 } /* getCords() */
 
@@ -145,8 +151,7 @@ return p_visible;
 }
 
 void entity::setCords( cords cordinates ){
-    p_xPos = cordinates.x;
-    p_yPos = cordinates.y;
+    p_cordinates = cordinates;
 }
 
 bool entity::isHit( hitRad& lhs, hitRad& rhs )
