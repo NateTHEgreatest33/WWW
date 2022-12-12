@@ -150,17 +150,17 @@ bool entity::getVisible( void )
 return p_visible;
 }
 
-void entity::isHitAction( cords cordinate,  ){
-    hitRad mouse( cordinates, 0 );
-    for( auto hitZone : p_hitPoints )
-        {
-        if( hitboxCollision( hitZone, mouse ) )
-            {
-            actionKeyboard[]();
-            break;
-            }
+void entity::isHitAction( cords cordinate  ){
+    // hitRad mouse( cordinate, 0 );
+    // for( auto hitZone : p_hitPoints )
+    //     {
+    //     if( hitboxCollision( hitZone, mouse ) )
+    //         {
+    //         actionKeyboard[]();
+    //         break;
+    //         }
             
-        }
+    //     }
 }
 
 
