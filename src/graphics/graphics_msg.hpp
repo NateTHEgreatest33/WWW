@@ -4,7 +4,7 @@
 *       graphics_msg.hpp
 *
 *   DESCRIPTION:
-*       main thread for game processing
+*       main messaging type for game processing
 *
 *   Copyright 2022 Nate Lenze
 *
@@ -29,7 +29,7 @@ typedef struct graphics_msg
     {
     graphic_type type;
     std::string id;
-    std::any graphic; //this should be a shared or unique ptr? that way when the graphics item is cleared or done, its cleared. 
+    std::any graphic; //TODO: this should be a shared or unique ptr? that way when the graphics item is cleared or done, its cleared. 
     graphics_msg( graphic_type t, std::string i, std::any g ) : type(t), id(i), graphic(g){}
 
     } graphics_msg;

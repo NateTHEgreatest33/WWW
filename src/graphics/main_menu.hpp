@@ -17,6 +17,7 @@
 #include <functional>
 #include "../entities/entity.hpp"
 #include "../include/raylib.h"
+#include "../utl/common_types.hpp"
 
 template <typename T>
 class main_menu : public screen
@@ -26,6 +27,7 @@ class main_menu : public screen
     std::unordered_map< std::string, entity* > p_currentObjects;
     std::string p_screen_name;
     T p_background;
+    Texture2D p_textureBackground;
     int screenHeight;
     int screenWidth;
 
@@ -47,7 +49,7 @@ class main_menu : public screen
 
     void clearAllObj( void );
 
-    void handleInput( void );
+    void handleInput( cords cordinates );
 
     void handleLogic( void );
 

@@ -38,30 +38,36 @@
 /*--------------------------------------------------------------------
                               PROCEDURES
 --------------------------------------------------------------------*/
-template <typename T>
-main_menu<T>::main_menu()
+
+template <>
+main_menu<Color>::main_menu( const std::string name, Color background, int screenH, int screenW )
     {
-        std::cout<<"hello world";
-        //clean up memory
+    p_screen_name = name;
+    p_background = background;
+
+    screenHeight = screenH;
+    screenWidth  = screenW;
     }
 
-
-template <typename T>
-main_menu<T>::main_menu( const std::string name, T background, int screenH, int screenW )
+template <>
+main_menu<Image>::main_menu( const std::string name, Image background, int screenH, int screenW )
     {
-        p_screen_name = name;
-        p_background = background;
+    p_screen_name = name;
+    p_background = background;
 
-        screenHeight = screenH;
-        screenWidth  = screenW;
+    screenHeight = screenH;
+    screenWidth  = screenW;
+
+    ImageResize(&p_background, screenWidth, screenHeight);
+    p_textureBackground = LoadTextureFromImage(p_background);
     }
 
 
 template <typename T>
 main_menu<T>::~main_menu()
     {
-        std::cout<<"hello world";
-        //clean up memory
+        
+        UnloadTexture( p_textureBackground );
     }
 
 /*********************************************************************
@@ -98,10 +104,8 @@ Local variables
 /*----------------------------------------------------------
 Draw background image first
 ----------------------------------------------------------*/
-ClearBackground( BLUE );
-ImageResize(&p_background, screenWidth, screenHeight);
-Texture2D texture = LoadTextureFromImage(p_background);
-DrawTexture(texture, 0, 0, WHITE);
+ClearBackground( WHITE );
+DrawTexture(p_textureBackground, 0, 0, WHITE);
 
 drawObjs();
 
@@ -152,14 +156,21 @@ for( auto drawObj : p_currentObjects )
 
 
 template <typename T>
-void main_menu<T>::handleInput( void ){}
+void main_menu<T>::handleInput( cords cordinates ){
+    //determine collisions 
+    for( auto obj : p_currentObjects )
+        {
+        //obj->isHitAction( cordinates );
+        }
+    
+}
 
 template <typename T>
 void main_menu<T>::handleLogic( void ){}
 
 template<typename T>
 void main_menu<T>::addObj( std::string id, entity* obj ){
-    gameplay::warning( (p_currentObjects.count( id ) > 0), "replacing ID");
+    gameplay::abort( (p_currentObjects.count( id ) > 0), "replacing ID");
     p_currentObjects[ id ] = obj;
 }
 

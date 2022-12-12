@@ -94,7 +94,7 @@ std::pair<cords, std::vector<hitRad>> info = other->getSpacingInfo();
 
 for( hitRad hitBox : p_hitPoints )
     {
-    if( std::all_of( info.second.begin(), info.second.end(), [this, &hitBox]( hitRad& current ){return this->isHit( hitBox, current); } ) )
+    if( std::all_of( info.second.begin(), info.second.end(), [this, &hitBox]( hitRad& current ){return this->hitboxCollision( hitBox, current); } ) )
         {
         return true;
         }
@@ -150,11 +150,25 @@ bool entity::getVisible( void )
 return p_visible;
 }
 
+void entity::isHitAction( cords cordinate,  ){
+    hitRad mouse( cordinates, 0 );
+    for( auto hitZone : p_hitPoints )
+        {
+        if( hitboxCollision( hitZone, mouse ) )
+            {
+            actionKeyboard[]();
+            break;
+            }
+            
+        }
+}
+
+
 void entity::setCords( cords cordinates ){
     p_cordinates = cordinates;
 }
 
-bool entity::isHit( hitRad& lhs, hitRad& rhs )
+bool entity::hitboxCollision( hitRad& lhs, hitRad& rhs )
 {
 double distance = sqrt(  
                   pow(( lhs.cordinates.x - rhs.cordinates.x ), 2) +
@@ -171,5 +185,5 @@ return false;
 //remove once defined
 //void entity::draw( void ){}
 void entity::actionKeyboard( KeyboardKey action ){}
-void entity::actionMouse( GamepadButton action ){}
-void entity::actionGamepad( MouseButton action ){}
+void entity::actionMouse( MouseButton action ){}
+void entity::actionGamepad( GamepadButton action ){}

@@ -57,7 +57,7 @@ class screen
     //void virtual addObj( std::string id, entity obj ) = 0;
     void virtual addObj( std::string id, entity* obj ) = 0;
 
-    void virtual handleInput( void ) = 0;
+    void virtual handleInput( cords cordinates ) = 0;
 
     void virtual handleLogic( void ) = 0;
 

@@ -9,6 +9,8 @@ namespace gameplay
 
 void warning( bool compare, std::string s );
 
+void abort( bool compare, std::string s );
+
 }
 
 #endif

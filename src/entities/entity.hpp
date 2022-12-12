@@ -19,6 +19,8 @@
 #include <vector>
 #include <iostream>
 #include "../include/raylib.h"
+#include "../utl/common_types.hpp"
+
 
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
@@ -27,15 +29,11 @@
 /*--------------------------------------------------------------------
                                 TYPES
 --------------------------------------------------------------------*/
-typedef struct cords{
-    int x;
-    int y;
-    cords(int xIn, int yIn) : x(xIn), y(yIn){}
-    cords() : x(0), y(0){}
-}cords;
-typedef struct {
+
+typedef struct hitRad{
     cords cordinates;
     int rad;
+    hitRad( cords cord, int rad ) : cordinates( cord ), rad( rad ) {}
 }hitRad;
 /*--------------------------------------------------------------------
                            MEMORY CONSTANTS
@@ -76,12 +74,17 @@ public:
 
     void setCords( cords cordinates );
 
+    void isHitAction( cords cordinates );
+
     void setHitbox( std::vector<hitRad> hitBox );
 
     void virtual draw( void ) = 0;
     void virtual actionKeyboard( KeyboardKey action );
-    void virtual actionMouse( GamepadButton action );
-    void virtual actionGamepad( MouseButton action );
+    void virtual actionMouse( MouseButton action );
+    void virtual actionGamepad( GamepadButton action );
+    void virtual initKeyboard( std::vector< std::pair< KeyboardKey, std::function<void()> > > inputList ) =0;
+    void virtual initMouse( std::vector< std::pair< MouseButton, std::function<void()> > > inputList ) =0;
+    void virtual initGamepad( std::vector< std::pair< GamepadButton, std::function<void()> > > inputList ) =0;
 
 private:
 
@@ -91,7 +94,7 @@ private:
     bool p_visible;
     std::string p_name;
 
-    bool isHit( hitRad& lhs, hitRad& rhs );
+    bool hitboxCollision( hitRad& lhs, hitRad& rhs );
 
 };
 

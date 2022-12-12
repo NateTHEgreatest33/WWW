@@ -16,17 +16,21 @@
 
 #include <iostream>
 #include <queue>
+#include <vector>
+#include <tuple>
+#include <functional>
 
 #include "graphics_main.hpp"
 #include "input_main.hpp"
 #include "game_main.hpp"
 #include "graphics/graphics_msg.hpp"
-
+#include "gameplay/event.hpp"
 
 #include"graphics/main_menu.hpp"
 #include"graphics/screen.hpp"
 #include "entities/button.hpp"
 #include "entities/entity.hpp"
+
 
 #include "utl/utl.hpp"
 /*--------------------------------------------------------------------
@@ -45,6 +49,9 @@
                           GLOBAL VARIABLES
 --------------------------------------------------------------------*/
 std::queue<graphics_msg> graphicsEvents;
+std::queue<event> inputEvents;
+screen* currentScreen;
+
 
 /*--------------------------------------------------------------------
                                 MACROS
@@ -53,6 +60,9 @@ std::queue<graphics_msg> graphicsEvents;
 /*--------------------------------------------------------------------
                               PROCEDURES
 --------------------------------------------------------------------*/
+void printHello(void){
+    std::cout<<"mouse button worked"<<std::endl;
+}
 /*********************************************************************
 *
 *   PROCEDURE NAME:
@@ -80,13 +90,20 @@ InitWindow(screenWidth, screenHeight, "Balloon Tower Offense");
 SetTargetFPS(60);
 
 gameplay::warning( true, "hello world");
+screen *backgroundImage = new main_menu<Image>("main menu", LoadImage("/Users/natelenze/GitHub/WWW/src/resources/test.png"), screenHeight, screenWidth );
 
-screen *backgroundImage = new main_menu<Image>("main menu", LoadImage("/Users/natelenze/GitHub/WWW/src/resources/test.png"), screenHeight, screenWidth );//"../../src/resources/test.png" );
-graphics_init( backgroundImage );
+currentScreen = backgroundImage;
+graphics_init( currentScreen );
+input_init( currentScreen );
+
 entity *newButton = new button( 10, 10, 100, 100, GREEN, "newButton", "hello world" );
-
+std::vector< std::pair< MouseButton, std::function<void()> > > Mactions;
+Mactions.push_back( std::make_pair( MOUSE_BUTTON_LEFT, printHello ));
+newButton->initMouse( Mactions );
 graphics_msg test( GRAPHIC_ENTITY, std::string("button1"), newButton );
 graphicsEvents.push( test );
+
+
 
 /*----------------------------------------------------------
 Main processing Loop
@@ -96,6 +113,7 @@ while ( !WindowShouldClose() )    // Detect window close button or ESC key
     
     graphics_main( graphicsEvents );
     
+    input_main( inputEvents );
     }
 
 CloseWindow();

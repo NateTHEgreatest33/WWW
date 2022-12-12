@@ -54,17 +54,17 @@ void button::draw( void ){
 
 void button::actionKeyboard( KeyboardKey action ){
     if( p_keyboardFunction.count( action ) )
-        p_keyboardFunction[ action ];
+        p_keyboardFunction[ action ]();
 }
 
 void button::actionMouse( MouseButton action ){
     if( p_mouseFunction.count( action ) )
-        p_mouseFunction[ action ];
+        p_mouseFunction[ action ]();
 }
 
 void button::actionGamepad( GamepadButton action ){
     if( p_gamepadFunction.count( action ) )
-        p_gamepadFunction[ action ];
+        p_gamepadFunction[ action ]();
 }
 
 

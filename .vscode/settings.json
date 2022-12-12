@@ -94,7 +94,8 @@
 		"any": "cpp",
 		"*.tpp": "cpp",
 		"variant": "cpp",
-		"entity.hpp": "c"
+		"entity.hpp": "c",
+		"set": "cpp"
 	},
 	//"C_Cpp.errorSquiggles": "Disabled"
 }
