@@ -15,6 +15,7 @@
 #include "entity.hpp"
 #include <algorithm>
 #include <cmath>
+#include <variant>
 
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
@@ -150,17 +151,21 @@ bool entity::getVisible( void )
 return p_visible;
 }
 
-void entity::isHitAction( cords cordinate  ){
-    // hitRad mouse( cordinate, 0 );
-    // for( auto hitZone : p_hitPoints )
-    //     {
-    //     if( hitboxCollision( hitZone, mouse ) )
-    //         {
-    //         actionKeyboard[]();
-    //         break;
-    //         }
-            
-    //     }
+void entity::isHitAction( event action  ){
+    //determine if hit
+
+    switch( action.input_type )
+        {
+        case in_MOUSE:
+            actionMouse( std::get<MouseButton>(action.input_selection), action.action );
+            break;
+        case in_KEYBOARD:
+            actionKeyboard( std::get<KeyboardKey>( action.input_selection ), action.action  );
+            break;
+        case in_GAMEPAD:
+        default:
+            break;
+        }
 }
 
 
@@ -184,6 +189,6 @@ return false;
 
 //remove once defined
 //void entity::draw( void ){}
-void entity::actionKeyboard( KeyboardKey action ){}
-void entity::actionMouse( MouseButton action ){}
-void entity::actionGamepad( GamepadButton action ){}
+// void entity::actionKeyboard( KeyboardKey action ){}
+// void entity::actionMouse( MouseButton action ){}
+// void entity::actionGamepad( GamepadButton action ){}

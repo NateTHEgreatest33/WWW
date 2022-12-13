@@ -18,6 +18,8 @@
 #include "../entities/entity.hpp"
 #include "../include/raylib.h"
 #include "../utl/common_types.hpp"
+#include "../gameplay/event.hpp"
+
 
 template <typename T>
 class main_menu : public screen
@@ -43,13 +45,13 @@ class main_menu : public screen
 
     void drawBackground( void );
 
-    void handleEvent( graphics_msg event );
+    void handleGraphicEvent( graphics_msg event );
     
     void addObj( std::string id, entity* obj );
 
     void clearAllObj( void );
 
-    void handleInput( cords cordinates );
+    void handleInputEvent( event action );
 
     void handleLogic( void );
 

@@ -30,6 +30,7 @@
 #include"graphics/screen.hpp"
 #include "entities/button.hpp"
 #include "entities/entity.hpp"
+#include "gameplay/event.hpp"
 
 
 #include "utl/utl.hpp"
@@ -60,7 +61,7 @@ screen* currentScreen;
 /*--------------------------------------------------------------------
                               PROCEDURES
 --------------------------------------------------------------------*/
-void printHello(void){
+void printHello(input_action y){
     std::cout<<"mouse button worked"<<std::endl;
 }
 /*********************************************************************
@@ -97,7 +98,7 @@ graphics_init( currentScreen );
 input_init( currentScreen );
 
 entity *newButton = new button( 10, 10, 100, 100, GREEN, "newButton", "hello world" );
-std::vector< std::pair< MouseButton, std::function<void()> > > Mactions;
+std::vector< std::pair< MouseButton, std::function<void(input_action)> > > Mactions;
 Mactions.push_back( std::make_pair( MOUSE_BUTTON_LEFT, printHello ));
 newButton->initMouse( Mactions );
 graphics_msg test( GRAPHIC_ENTITY, std::string("button1"), newButton );

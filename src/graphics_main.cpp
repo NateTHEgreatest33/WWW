@@ -81,7 +81,7 @@ Proccess outstanding events
 
 while( !events.empty() )
     {
-    current_screen->handleEvent( events.front() );
+    current_screen->handleGraphicEvent( events.front() );
     events.pop();
     }
 

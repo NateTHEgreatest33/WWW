@@ -50,14 +50,14 @@ class screen
 
     void virtual drawBackground( void ) = 0;
 
-    void virtual handleEvent( graphics_msg event ) = 0;
+    void virtual handleGraphicEvent( graphics_msg event ) = 0;
 
     void virtual clearAllObj( void ) = 0;
 
     //void virtual addObj( std::string id, entity obj ) = 0;
     void virtual addObj( std::string id, entity* obj ) = 0;
 
-    void virtual handleInput( cords cordinates ) = 0;
+    void virtual handleInputEvent( event action ) = 0;
 
     void virtual handleLogic( void ) = 0;
 

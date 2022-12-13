@@ -52,23 +52,23 @@ void button::draw( void ){
     DrawRectangle(  cord.x, cord.y, p_length, p_height, p_color );
 }
 
-void button::actionKeyboard( KeyboardKey action ){
-    if( p_keyboardFunction.count( action ) )
-        p_keyboardFunction[ action ]();
+void button::actionKeyboard( KeyboardKey input, input_action action ){
+    if( p_keyboardFunction.count( input ) )
+        p_keyboardFunction[ input ](action);
 }
 
-void button::actionMouse( MouseButton action ){
-    if( p_mouseFunction.count( action ) )
-        p_mouseFunction[ action ]();
+void button::actionMouse( MouseButton input, input_action action ){
+    if( p_mouseFunction.count( input ) )
+        p_mouseFunction[ input ](action);
 }
 
-void button::actionGamepad( GamepadButton action ){
-    if( p_gamepadFunction.count( action ) )
-        p_gamepadFunction[ action ]();
+void button::actionGamepad( GamepadButton input, input_action action ){
+    if( p_gamepadFunction.count( input ) )
+        p_gamepadFunction[ input ](action);
 }
 
 
-void button::initKeyboard( std::vector< std::pair< KeyboardKey, std::function<void()> > > inputList )
+void button::initKeyboard( std::vector< std::pair< KeyboardKey, std::function<void(input_action)> > > inputList )
 {
 for( auto i : inputList )
     {
@@ -76,7 +76,7 @@ for( auto i : inputList )
     }
 }
 
-void button::initMouse( std::vector< std::pair< MouseButton, std::function<void()> > > inputList )
+void button::initMouse( std::vector< std::pair< MouseButton, std::function<void(input_action)> > > inputList )
 {
 for( auto i : inputList )
     {
@@ -84,7 +84,7 @@ for( auto i : inputList )
     }
 }
 
-void button::initGamepad( std::vector< std::pair< GamepadButton, std::function<void()> > > inputList )
+void button::initGamepad( std::vector< std::pair< GamepadButton, std::function<void(input_action)> > > inputList )
 {
 for( auto i : inputList )
     {

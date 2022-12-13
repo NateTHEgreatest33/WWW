@@ -112,7 +112,7 @@ drawObjs();
 }
 
 template <typename T>
-void main_menu<T>::handleEvent( graphics_msg event )
+void main_menu<T>::handleGraphicEvent( graphics_msg event )
     {
     switch( event.type )
         {
@@ -124,6 +124,7 @@ void main_menu<T>::handleEvent( graphics_msg event )
             break;
         case GRAPHIC_OTHER:
         default:
+            gameplay::warning( true, "unimplemented functionality hit" );
             break;
         }
 
@@ -156,11 +157,11 @@ for( auto drawObj : p_currentObjects )
 
 
 template <typename T>
-void main_menu<T>::handleInput( cords cordinates ){
+void main_menu<T>::handleInputEvent( event action ){
     //determine collisions 
     for( auto obj : p_currentObjects )
         {
-        //obj->isHitAction( cordinates );
+        obj.second->isHitAction( action );
         }
     
 }

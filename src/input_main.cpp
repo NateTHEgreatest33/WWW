@@ -72,13 +72,17 @@ void input_main
     /*-------------------------------------
     Handle old key presses
     -------------------------------------*/
-    for( auto key = activeKeys.begin(); key != activeKeys.end(); key++ )
+    for( auto key = activeKeys.begin(); key != activeKeys.end();  )
         {
         if( IsKeyUp( *key ) )
             {
             event newKeyReleased( in_KEYBOARD, *key, cords(0,0), action_KEY_RELEASED );
             events.push( newKeyReleased );
-            activeKeys.erase( key-- );
+            key = activeKeys.erase( key );
+            }
+        else
+            {
+            key++;
             }
         }
 
@@ -97,15 +101,29 @@ void input_main
     /*-------------------------------------
     Handle old Mouse Clicks
     -------------------------------------*/
-    for( auto click = activeMouseButtons.begin(); click != activeMouseButtons.end(); click++ )
+    for( auto click = activeMouseButtons.begin(); click != activeMouseButtons.end(); )
         {
         if( IsMouseButtonUp( *click ) )
             {
             events.push( event( in_MOUSE, *click, cords( GetMouseX(), GetMouseY() ), action_MOUSE_RELEASED )  );
-            activeMouseButtons.erase( click-- );
+            click = activeMouseButtons.erase( click );
+            }
+        else{
+            click++;
             }
         }
 
         
+    /*-------------------------------------
+    Have Screen Handle Inputs
+    -------------------------------------*/
+    while( !events.empty() )
+        {
+        current_screen->handleInputEvent( events.front() );
+        events.pop();
+        }
+
+
+
     //TODO: add gamepad support
 }

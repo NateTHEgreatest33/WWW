@@ -20,6 +20,7 @@
 #include <iostream>
 #include "../include/raylib.h"
 #include "../utl/common_types.hpp"
+#include "../gameplay/event.hpp"
 
 
 /*--------------------------------------------------------------------
@@ -74,17 +75,17 @@ public:
 
     void setCords( cords cordinates );
 
-    void isHitAction( cords cordinates );
+    void isHitAction( event action );
 
     void setHitbox( std::vector<hitRad> hitBox );
 
     void virtual draw( void ) = 0;
-    void virtual actionKeyboard( KeyboardKey action );
-    void virtual actionMouse( MouseButton action );
-    void virtual actionGamepad( GamepadButton action );
-    void virtual initKeyboard( std::vector< std::pair< KeyboardKey, std::function<void()> > > inputList ) =0;
-    void virtual initMouse( std::vector< std::pair< MouseButton, std::function<void()> > > inputList ) =0;
-    void virtual initGamepad( std::vector< std::pair< GamepadButton, std::function<void()> > > inputList ) =0;
+    void virtual actionKeyboard( KeyboardKey input, input_action action ) = 0;
+    void virtual actionMouse( MouseButton input, input_action action ) = 0;
+    void virtual actionGamepad( GamepadButton input, input_action action ) = 0;
+    void virtual initKeyboard( std::vector< std::pair< KeyboardKey, std::function<void(input_action)> > > inputList ) =0;
+    void virtual initMouse( std::vector< std::pair< MouseButton, std::function<void(input_action)> > > inputList ) =0;
+    void virtual initGamepad( std::vector< std::pair< GamepadButton, std::function<void(input_action)> > > inputList ) =0;
 
 private:
 
