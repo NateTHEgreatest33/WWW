@@ -31,10 +31,22 @@
                                 TYPES
 --------------------------------------------------------------------*/
 
+typedef enum {
+ hit_CIRCLE,
+ hit_SQUARE,
+ hit_NUM
+} hit_type;
+
+
+
 typedef struct hitRad{
+    hit_type hitbox_type;
     cords cordinates;
     int rad;
-    hitRad( cords cord, int rad ) : cordinates( cord ), rad( rad ) {}
+    int length;
+    int height;
+    hitRad( cords cord, int rad ) : cordinates( cord ), rad( rad ), length(0), height(0), hitbox_type( hit_CIRCLE ) {}
+    hitRad( cords cord, int len, int height ) : cordinates( cord ), rad( 0 ), length(len), height(height), hitbox_type( hit_SQUARE ) {}
 }hitRad;
 /*--------------------------------------------------------------------
                            MEMORY CONSTANTS
@@ -96,6 +108,9 @@ private:
     std::string p_name;
 
     bool hitboxCollision( hitRad& lhs, hitRad& rhs );
+    bool isHit( cords cordinates );
+    bool isHitCircle( hitRad hitCircle, cords cord );
+    bool isHitSquare( hitRad hitBox, cords cord );
 
 };
 

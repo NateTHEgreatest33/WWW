@@ -152,13 +152,14 @@ return p_visible;
 }
 
 void entity::isHitAction( event action  ){
-    //determine if hit
-
+    
     switch( action.input_type )
         {
         case in_MOUSE:
-            actionMouse( std::get<MouseButton>(action.input_selection), action.action );
+            if( isHit( action.cordinates ) )
+                actionMouse( std::get<MouseButton>(action.input_selection), action.action );
             break;
+
         case in_KEYBOARD:
             actionKeyboard( std::get<KeyboardKey>( action.input_selection ), action.action  );
             break;
@@ -186,7 +187,61 @@ return false;
 }
 
 
+bool entity::isHitCircle( hitRad hitCircle, cords cord )
+    {
+    if( hitCircle.hitbox_type != hit_CIRCLE )
+        return false;
 
+    double distance = sqrt( pow(( cord.x - ( hitCircle.cordinates.x + p_cordinates.x )), 2) +
+                            pow(( cord.y - ( hitCircle.cordinates.y + p_cordinates.y )), 2) );
+
+    if( distance < hitCircle.rad )
+        return true;
+
+    return false;
+    }
+
+bool entity::isHitSquare( hitRad hitBox, cords cord )
+    {
+    //note: hit square cords are from bottom left corner and length + height go right & up
+    if( hitBox.hitbox_type != hit_SQUARE )
+        return false;
+
+    if( ( p_cordinates.x + hitBox.cordinates.x )                 <= cord.x && 
+        ( p_cordinates.x + hitBox.cordinates.x + hitBox.length )  >= cord.x &&
+        ( p_cordinates.y + hitBox.cordinates.y )                 <= cord.y && 
+        ( p_cordinates.y + hitBox.cordinates.y + hitBox.height ) >= cord.y )
+        return true;
+
+    return false;
+    }
+
+
+
+
+bool entity::isHit( cords cordinates )
+    {
+    bool rtnValue{false};
+
+    for( auto hits : p_hitPoints )
+        {
+        if( hits.hitbox_type == hit_CIRCLE )
+            rtnValue = isHitCircle( hits, cordinates );
+
+        if( hits.hitbox_type == hit_SQUARE )
+            rtnValue = isHitSquare( hits, cordinates );
+
+        if( rtnValue )
+            return true;
+         
+        }
+
+    return false;
+    }
+
+void entity::setHitbox( std::vector<hitRad> hitBox ){
+    p_hitPoints = hitBox;
+}
 //remove once defined
 //void entity::draw( void ){}
 // void entity::actionKeyboard( KeyboardKey action ){}

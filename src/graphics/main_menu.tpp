@@ -155,13 +155,11 @@ for( auto drawObj : p_currentObjects )
 }
 
 
-
 template <typename T>
 void main_menu<T>::handleInputEvent( event action ){
-    //determine collisions 
-    for( auto obj : p_currentObjects )
+    for( auto ent : p_currentObjects )
         {
-        obj.second->isHitAction( action );
+        ent.second->isHitAction( action );
         }
     
 }

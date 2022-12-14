@@ -98,6 +98,10 @@ graphics_init( currentScreen );
 input_init( currentScreen );
 
 entity *newButton = new button( 10, 10, 100, 100, GREEN, "newButton", "hello world" );
+std::vector<hitRad> hitBox;
+hitRad newHit( cords(0,0), 100, 100 );
+hitBox.push_back( newHit );
+newButton->setHitbox( hitBox );
 std::vector< std::pair< MouseButton, std::function<void(input_action)> > > Mactions;
 Mactions.push_back( std::make_pair( MOUSE_BUTTON_LEFT, printHello ));
 newButton->initMouse( Mactions );
