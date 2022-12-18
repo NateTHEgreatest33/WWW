@@ -217,8 +217,6 @@ bool entity::isHitSquare( hitRad hitBox, cords cord )
     }
 
 
-
-
 bool entity::isHit( cords cordinates )
     {
     bool rtnValue{false};
@@ -242,8 +240,44 @@ bool entity::isHit( cords cordinates )
 void entity::setHitbox( std::vector<hitRad> hitBox ){
     p_hitPoints = hitBox;
 }
-//remove once defined
-//void entity::draw( void ){}
-// void entity::actionKeyboard( KeyboardKey action ){}
-// void entity::actionMouse( MouseButton action ){}
-// void entity::actionGamepad( GamepadButton action ){}
+
+
+void entity::actionKeyboard( KeyboardKey input, input_action action ){
+    if( p_keyboardFunction.count( input ) )
+        p_keyboardFunction[ input ](action);
+}
+
+void entity::actionMouse( MouseButton input, input_action action ){
+    if( p_mouseFunction.count( input ) )
+        p_mouseFunction[ input ](action);
+}
+
+void entity::actionGamepad( GamepadButton input, input_action action ){
+    if( p_gamepadFunction.count( input ) )
+        p_gamepadFunction[ input ](action);
+}
+
+
+void entity::initKeyboard( std::vector< std::pair< KeyboardKey, std::function<void(input_action)> > > inputList )
+{
+for( auto i : inputList )
+    {
+    p_keyboardFunction[ i.first ] = i.second;
+    }
+}
+
+void entity::initMouse( std::vector< std::pair< MouseButton, std::function<void(input_action)> > > inputList )
+{
+for( auto i : inputList )
+    {
+    p_mouseFunction[ i.first ] = i.second;
+    }
+}
+
+void entity::initGamepad( std::vector< std::pair< GamepadButton, std::function<void(input_action)> > > inputList )
+{
+for( auto i : inputList )
+    {
+    p_gamepadFunction[ i.first ] = i.second;
+    }
+}

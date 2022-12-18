@@ -18,7 +18,11 @@
 #include <utility>
 #include <vector>
 #include <iostream>
+#include <unordered_map>
+#include <functional>
+
 #include "../include/raylib.h"
+
 #include "../utl/common_types.hpp"
 #include "../gameplay/event.hpp"
 
@@ -91,13 +95,20 @@ public:
 
     void setHitbox( std::vector<hitRad> hitBox );
 
+    void actionKeyboard( KeyboardKey input, input_action action );
+
+    void actionMouse( MouseButton input, input_action action );
+
+    void actionGamepad( GamepadButton input, input_action action );
+
+    void initKeyboard( std::vector< std::pair< KeyboardKey, std::function<void(input_action)> > > inputList );
+
+    void initMouse( std::vector< std::pair< MouseButton, std::function<void(input_action)> > > inputList );
+
+    void initGamepad( std::vector< std::pair< GamepadButton, std::function<void(input_action)> > > inputList );
+
     void virtual draw( void ) = 0;
-    void virtual actionKeyboard( KeyboardKey input, input_action action ) = 0;
-    void virtual actionMouse( MouseButton input, input_action action ) = 0;
-    void virtual actionGamepad( GamepadButton input, input_action action ) = 0;
-    void virtual initKeyboard( std::vector< std::pair< KeyboardKey, std::function<void(input_action)> > > inputList ) =0;
-    void virtual initMouse( std::vector< std::pair< MouseButton, std::function<void(input_action)> > > inputList ) =0;
-    void virtual initGamepad( std::vector< std::pair< GamepadButton, std::function<void(input_action)> > > inputList ) =0;
+
 
 private:
 
@@ -106,6 +117,11 @@ private:
     std::any p_image;
     bool p_visible;
     std::string p_name;
+
+    std::unordered_map< KeyboardKey, std::function<void(input_action)> > p_keyboardFunction;
+    std::unordered_map< MouseButton, std::function<void(input_action)> > p_mouseFunction;
+    std::unordered_map< GamepadButton, std::function<void(input_action)> > p_gamepadFunction;
+
 
     bool hitboxCollision( hitRad& lhs, hitRad& rhs );
     bool isHit( cords cordinates );
