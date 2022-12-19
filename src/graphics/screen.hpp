@@ -14,10 +14,18 @@
 /*--------------------------------------------------------------------
                            GENERAL INCLUDES
 --------------------------------------------------------------------*/
+#include "screen.hpp"
+#include <unordered_map>
+#include <functional>
 #include <iostream>
 
-#include "graphics_msg.hpp"
 #include "../entities/entity.hpp"
+#include "../include/raylib.h"
+#include "../utl/common_types.hpp"
+#include "../gameplay/event.hpp"
+
+#include "graphics_msg.hpp"
+
 /*--------------------------------------------------------------------
                           LITERAL CONSTANTS
 --------------------------------------------------------------------*/
@@ -42,25 +50,45 @@
                               CLASSES
 --------------------------------------------------------------------*/
 
+template <typename T>
 class screen 
     {
+    protected:
+    std::unordered_map< std::string, entity* > p_currentObjects;
+    
+    std::string p_screen_name;
+
+    T p_background;
+    Texture2D p_textureBackground;
+
+    int p_screenHeight;
+    int p_screenWidth;
+
     private:
    
     public:
 
-    void virtual drawBackground( void ) = 0;
+    screen( const std::string name, T background, int screenH, int screenW);
 
-    void virtual handleGraphicEvent( graphics_msg event ) = 0;
+    ~screen();
 
-    void virtual clearAllObj( void ) = 0;
+    void drawObjs( void );
 
-    //void virtual addObj( std::string id, entity obj ) = 0;
-    void virtual addObj( std::string id, entity* obj ) = 0;
+    void drawBackground( void );
 
-    void virtual handleInputEvent( event action ) = 0;
+    void handleGraphicEvent( graphics_msg event );
+
+    void clearAllObj( void );
+
+    void addObj( std::string id, entity* obj );
+
+    void handleInputEvent( event action );
 
     void virtual handleLogic( void ) = 0;
 
     };
+
+
+#include "screen.tpp"
 
 #endif

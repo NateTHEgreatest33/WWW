@@ -22,18 +22,11 @@
 
 
 template <typename T>
-class main_menu : public screen
+class main_menu : public screen<T>
     {
+    protected:
+    
     private:
-    //https://www.educative.io/courses/cpp-standard-library-including-cpp-14-and-cpp-17/gkDqXZlVq4l
-    std::unordered_map< std::string, entity* > p_currentObjects;
-    std::string p_screen_name;
-    T p_background;
-    Texture2D p_textureBackground;
-    int screenHeight;
-    int screenWidth;
-
-    void drawObjs( void );
 
     public:
     
@@ -42,16 +35,6 @@ class main_menu : public screen
     main_menu();
 
     ~main_menu();
-
-    void drawBackground( void );
-
-    void handleGraphicEvent( graphics_msg event );
-    
-    void addObj( std::string id, entity* obj );
-
-    void clearAllObj( void );
-
-    void handleInputEvent( event action );
 
     void handleLogic( void );
 

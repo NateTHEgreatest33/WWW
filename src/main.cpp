@@ -91,7 +91,7 @@ InitWindow(screenWidth, screenHeight, "Balloon Tower Offense");
 SetTargetFPS(60);
 
 gameplay::warning( true, "hello world");
-screen *backgroundImage = new main_menu<Image>("main menu", LoadImage("/Users/natelenze/GitHub/WWW/src/resources/test.png"), screenHeight, screenWidth );
+screen<Image> *backgroundImage = new main_menu<Image>("main menu", LoadImage("/Users/natelenze/GitHub/WWW/src/resources/test.png"), screenHeight, screenWidth );
 
 currentScreen = backgroundImage;
 graphics_init( currentScreen );
