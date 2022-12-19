@@ -1,7 +1,7 @@
 /*********************************************************************
 *
 *   NAME:
-*       main_menu.tpp
+*       game_screen.tpp
 *
 *   DESCRIPTION:
 *       main menu class for graphics
@@ -12,7 +12,7 @@
 /*--------------------------------------------------------------------
                            GENERAL INCLUDES
 --------------------------------------------------------------------*/
-#include "main_menu.hpp"
+#include "game_screen.hpp"
 #include "../utl/utl.hpp"
 
 /*--------------------------------------------------------------------
@@ -41,7 +41,7 @@
 
 
 template <>
-main_menu<Image>::main_menu( const std::string name, Image background, int screenH, int screenW ) : screen( name, screenH, screenW )
+game_screen<Image>::game_screen( const std::string name, Image background, int screenH, int screenW ) : screen( name, screenH, screenW )
     {
     p_screen_name = name;
     p_background = background;
@@ -54,7 +54,7 @@ main_menu<Image>::main_menu( const std::string name, Image background, int scree
     }
 
 template <>
-main_menu<Color>::main_menu( const std::string name, Color background, int screenH, int screenW ) : screen( name, screenH, screenW )
+game_screen<Color>::game_screen( const std::string name, Color background, int screenH, int screenW ) : screen( name, screenH, screenW )
     {
     p_screen_name = name;
     p_background = background;
@@ -66,7 +66,7 @@ main_menu<Color>::main_menu( const std::string name, Color background, int scree
 
 
 template <typename T>
-main_menu<T>::~main_menu()
+game_screen<T>::~game_screen()
     {
     UnloadTexture( p_textureBackground );
     }
@@ -76,7 +76,7 @@ main_menu<T>::~main_menu()
 
 
 template <typename T>
-void main_menu<T>::handleLogic( void ){}
+void game_screen<T>::handleLogic( void ){}
 
 
 /*********************************************************************
@@ -89,7 +89,7 @@ void main_menu<T>::handleLogic( void ){}
 *
 *********************************************************************/
 template <>
-void main_menu<Color>::drawBackground( void )
+void game_screen<Color>::drawBackground( void )
 {
 /*----------------------------------------------------------
 Local variables
@@ -113,7 +113,7 @@ drawObjs();
 *
 *********************************************************************/
 template <>
-void main_menu<Image>::drawBackground( void )
+void game_screen<Image>::drawBackground( void )
 {
 /*----------------------------------------------------------
 Local variables
@@ -139,7 +139,7 @@ drawObjs();
 *
 *********************************************************************/
 template <typename T>
-void main_menu<T>::handleGraphicEvent( graphics_msg event )
+void game_screen<T>::handleGraphicEvent( graphics_msg event )
     {
     switch( event.type )
         {

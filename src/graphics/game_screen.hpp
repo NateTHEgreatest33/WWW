@@ -1,7 +1,7 @@
 /*********************************************************************
 *
 *   NAME:
-*       main_menu.hpp
+*       game_screen.hpp
 *
 *   DESCRIPTION:
 *       main menu class for graphics
@@ -22,8 +22,8 @@
 
 
 template <typename T>
-//todo: rename main_menu to game screen
-class main_menu : public screen
+//todo: rename game_screen to game screen
+class game_screen : public screen
     {
     protected:
     T p_background;
@@ -33,11 +33,11 @@ class main_menu : public screen
 
     public:
     
-    main_menu( const std::string name, const T background, int screenH, int screenW );
+    game_screen( const std::string name, const T background, int screenH, int screenW );
 
-    main_menu();
+    game_screen();
 
-    ~main_menu();
+    ~game_screen();
 
     void handleGraphicEvent( graphics_msg event );
     
@@ -47,5 +47,6 @@ class main_menu : public screen
 
     };
 
-#include "main_menu.tpp"
+#include "game_screen.tpp"
+
 #endif
