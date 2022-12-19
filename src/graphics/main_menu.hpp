@@ -22,9 +22,12 @@
 
 
 template <typename T>
-class main_menu : public screen<T>
+//todo: rename main_menu to game screen
+class main_menu : public screen
     {
     protected:
+    T p_background;
+    Texture2D p_textureBackground;
     
     private:
 
@@ -35,6 +38,10 @@ class main_menu : public screen<T>
     main_menu();
 
     ~main_menu();
+
+    void handleGraphicEvent( graphics_msg event );
+    
+    void drawBackground( void ); 
 
     void handleLogic( void );
 

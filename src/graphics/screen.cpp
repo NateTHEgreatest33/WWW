@@ -1,7 +1,7 @@
 /*********************************************************************
 *
 *   NAME:
-*       screen.tpp
+*       screen.cpp
 *
 *   DESCRIPTION:
 *       template file for screen functionality
@@ -39,65 +39,17 @@
                               PROCEDURES
 --------------------------------------------------------------------*/
 
+
 /*********************************************************************
 *
 *   PROCEDURE NAME:
-*       drawBackground<Colo>
-*
-*   DESCRIPTION:
-*       runs through list of objects + backgrounds and draws
-*
-*********************************************************************/
-template <>
-void screen<Color>::drawBackground( void )
-{
-/*----------------------------------------------------------
-Local variables
-----------------------------------------------------------*/
-
-/*----------------------------------------------------------
-Draw background image first
-----------------------------------------------------------*/
-ClearBackground( p_background );
-drawObjs();
-
-}
-/*********************************************************************
-*
-*   PROCEDURE NAME:
-*       drawBackground<Image>
-*
-*   DESCRIPTION:
-*       runs through list of objects + backgrounds and draws
-*
-*********************************************************************/
-template <>
-void screen<Image>::drawBackground( void )
-{
-/*----------------------------------------------------------
-Local variables
-----------------------------------------------------------*/
-
-/*----------------------------------------------------------
-Draw background image first
-----------------------------------------------------------*/
-ClearBackground( WHITE );
-DrawTexture(p_textureBackground, 0, 0, WHITE);
-
-drawObjs();
-
-}
-/*********************************************************************
-*
-*   PROCEDURE NAME:
-*       drawObjs<T>
+*       drawObjs
 *
 *   DESCRIPTION:
 *       Runs through list of entity objects and calls draw function
 *
 *********************************************************************/
-template <typename T>
-void screen<T>::drawObjs( void )
+void screen::drawObjs( void )
 {
 /*----------------------------------------------------------
 Draw Objects
@@ -112,43 +64,13 @@ for( auto drawObj : p_currentObjects )
 /*********************************************************************
 *
 *   PROCEDURE NAME:
-*       handleGraphicEvent<T>
-*
-*   DESCRIPTION:
-*       Responds to graphics_msg
-*
-*********************************************************************/
-template <typename T>
-void screen<T>::handleGraphicEvent( graphics_msg event )
-    {
-    switch( event.type )
-        {
-        case GRAPHIC_SCREEN:
-            p_background = std::any_cast<T>(event.graphic);
-            break;            
-        case GRAPHIC_ENTITY:
-            p_currentObjects[ event.id ] = std::any_cast<entity*>(event.graphic);
-            break;
-        case GRAPHIC_OTHER:
-        default:
-            gameplay::warning( true, "unimplemented functionality hit" );
-            break;
-        }
-
-    }
-
-
-/*********************************************************************
-*
-*   PROCEDURE NAME:
-*       clearAllObj<T>
+*       clearAllObj
 *
 *   DESCRIPTION:
 *       clears all objects on the screen except background object
 *
 *********************************************************************/
-template <typename T>
-void screen<T>::clearAllObj( void )
+void screen::clearAllObj( void )
 {
 /*----------------------------------------------------------
 remove objects that are not background
@@ -165,33 +87,29 @@ for( auto drawObj : p_currentObjects )
 /*********************************************************************
 *
 *   PROCEDURE NAME:
-*       handleInputEvent<T>
+*       handleInputEvent
 *
 *   DESCRIPTION:
 *       handles event objects
 *
 *********************************************************************/
-template <typename T>
-void screen<T>::handleInputEvent( event action ){
+void screen::handleInputEvent( event action ){
     for( auto ent : p_currentObjects )
         {
         ent.second->isHitAction( action );
         }
-    
 }
-
 
 /*********************************************************************
 *
 *   PROCEDURE NAME:
-*       addObj<T>
+*       addObj
 *
 *   DESCRIPTION:
 *       adds new entity object
 *
 *********************************************************************/
-template<typename T>
-void screen<T>::addObj( std::string id, entity* obj ){
+void screen::addObj( std::string id, entity* obj ){
     gameplay::abort( (p_currentObjects.count( id ) > 0), "replacing ID");
     p_currentObjects[ id ] = obj;
 }
@@ -199,17 +117,15 @@ void screen<T>::addObj( std::string id, entity* obj ){
 /*********************************************************************
 *
 *   PROCEDURE NAME:
-*       screen<Color>
+*       screen
 *
 *   DESCRIPTION:
-*       Constructor for Color template parameter
+*       Constructor for screen class
 *
 *********************************************************************/
-template <>
-screen<Color>::screen( const std::string name, Color background, int screenH, int screenW )
+screen::screen( const std::string name, int screenH, int screenW )
     {
     p_screen_name = name;
-    p_background = background;
 
     p_screenHeight = screenH;
     p_screenWidth  = screenW;
@@ -218,37 +134,13 @@ screen<Color>::screen( const std::string name, Color background, int screenH, in
 /*********************************************************************
 *
 *   PROCEDURE NAME:
-*       screen<Image>
-*
-*   DESCRIPTION:
-*       Constructor for Image template parameter
-*
-*********************************************************************/
-template <>
-screen<Image>::screen( const std::string name, Image background, int screenH, int screenW )
-    {
-    p_screen_name = name;
-    p_background = background;
-
-    p_screenHeight = screenH;
-    p_screenWidth  = screenW;
-
-    ImageResize(&p_background, p_screenWidth, p_screenHeight);
-    p_textureBackground = LoadTextureFromImage(p_background);
-    }
-
-/*********************************************************************
-*
-*   PROCEDURE NAME:
-*       ~screen<T>
+*       ~screen
 *
 *   DESCRIPTION:
 *       Deconstructor for screen class
 *
 *********************************************************************/
-template <typename T>
-screen<T>::~screen()
+screen::~screen()
     {
-        UnloadTexture( p_textureBackground );
         
     }

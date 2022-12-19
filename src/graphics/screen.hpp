@@ -50,16 +50,12 @@
                               CLASSES
 --------------------------------------------------------------------*/
 
-template <typename T>
 class screen 
     {
     protected:
     std::unordered_map< std::string, entity* > p_currentObjects;
     
     std::string p_screen_name;
-
-    T p_background;
-    Texture2D p_textureBackground;
 
     int p_screenHeight;
     int p_screenWidth;
@@ -68,15 +64,11 @@ class screen
    
     public:
 
-    screen( const std::string name, T background, int screenH, int screenW);
+    screen( const std::string name, int screenH, int screenW);
 
     ~screen();
 
     void drawObjs( void );
-
-    void drawBackground( void );
-
-    void handleGraphicEvent( graphics_msg event );
 
     void clearAllObj( void );
 
@@ -84,11 +76,10 @@ class screen
 
     void handleInputEvent( event action );
 
+    void virtual handleGraphicEvent( graphics_msg event ) =0;
+    void virtual drawBackground( void ) =0; 
     void virtual handleLogic( void ) = 0;
 
     };
-
-
-#include "screen.tpp"
 
 #endif
